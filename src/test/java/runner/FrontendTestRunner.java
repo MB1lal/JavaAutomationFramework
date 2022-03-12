@@ -10,9 +10,10 @@ import org.junit.runner.RunWith;
         features = {"src/test/resources/features/frontend"},
         glue = {"frontend"},
         tags = "@test and not @ignore",
+        stepNotifications = true,
         plugin = {
                 "json:target/cucumber-report/cucumber.json"
         }
 )
-public class frontendTestRunner {
+public class FrontendTestRunner {
 }
