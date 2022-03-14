@@ -1,5 +1,6 @@
 package frontend.steps;
 
+import frontend.pages.GooglePages;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import net.serenitybdd.core.Serenity;
@@ -8,13 +9,13 @@ import org.openqa.selenium.WebDriver;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static utils.SharedStateConstants.FRONTEND.WEBDRIVER;
 
-public class GoogleSteps {
+public class GoogleSteps extends BaseSteps{
 
+    GooglePages googlePages;
 
     @Given("I open a browser")
     public void openingABrowser() {
-        WebDriver driver = Serenity.sessionVariableCalled(WEBDRIVER);
-        driver.get("https://www.google.com");
+        googlePages.open();
     }
 
     @Then("The page is loaded")
