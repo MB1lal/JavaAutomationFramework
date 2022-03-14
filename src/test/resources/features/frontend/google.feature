@@ -4,7 +4,7 @@
     Background: Check for internet connectivity
       Given User has internet connectivity
 
-    Scenario: Navigating to google.com
+    Scenario: Navigating to Google
       Given I open a browser
       Then The page is loaded
 
