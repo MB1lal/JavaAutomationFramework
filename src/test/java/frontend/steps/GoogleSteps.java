@@ -20,10 +20,7 @@ public class GoogleSteps extends BaseSteps{
 
     @Then("The page is loaded")
     public void assertingThatPageIsLoaded() {
-        WebDriver driver = Serenity.sessionVariableCalled(WEBDRIVER);
-        assertThat(driver.getTitle())
-                .isEqualTo("Google")
-                .as("The title of the page was : " + driver.getTitle());
+        googlePages.pageHasLogo();
     }
 
 }
