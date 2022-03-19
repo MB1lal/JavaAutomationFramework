@@ -1,4 +1,4 @@
-@test @Browser
+@test
   Feature: Searching a term on google
 
     Background: Check for internet connectivity

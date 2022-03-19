@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 
 import java.time.Duration;
 
-@DefaultUrl("https://www.google.com")
+@DefaultUrl("page:googleURL")
 public class GooglePages extends PageObject {
     @FindBy(className = "lnXdpd")
     WebElementFacade pageLogo;
