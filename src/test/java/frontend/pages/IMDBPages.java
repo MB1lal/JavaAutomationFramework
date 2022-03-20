@@ -17,6 +17,9 @@ public class IMDBPages extends PageObject {
     @FindBy(css = "input[class='ipc-metadata-list-item__label ipc-metadata-list-item__label--link']")
     WebElementFacade allCastAndCrew;
 
+    @FindBy(xpath = "//*[@id=\"fullcredits_content\"]/table[3]/tbody/tr[4]/td[2]/a")
+    WebElementFacade castTable;
+
     public void pageHasLogo() {
         pageLogo.withTimeoutOf(Duration.ofSeconds(3));
         pageLogo.isDisplayed();
