@@ -31,7 +31,7 @@ public class ExcelReader
     {
         List<List<String>> excelData = new ArrayList<>();
 
-        String filePath = System.getProperty("user.dir") + "/src/main/resources/testData.xlsx";
+        String filePath = System.getProperty("user.dir") + "/src/test/resources/data-files/testData.xlsx";
 
         int r = 0;
         int c = 0;
@@ -90,5 +90,22 @@ public class ExcelReader
         }
 
         return excelData;
+    }
+
+    public int getColumnIndex(String sheetIndex) {
+        int columnIndex;
+        switch (sheetIndex.toUpperCase().charAt(0)) {
+            case 'A':
+                columnIndex = 0;
+                break;
+
+            case 'B':
+                columnIndex = 1;
+                break;
+
+            default:
+                throw new IllegalArgumentException("Incorrect specified index");
+        }
+        return columnIndex;
     }
 }

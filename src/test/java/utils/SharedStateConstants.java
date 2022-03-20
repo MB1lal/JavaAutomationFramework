@@ -12,7 +12,9 @@ public enum SharedStateConstants {
         URL,
         RESPONSE,
         WEBDRIVER,
-        EXCEL_DATA
+        EXCEL_DATA,
+        LINK_TEXT,
+        DRIVER_TABS
     }
 
 }
