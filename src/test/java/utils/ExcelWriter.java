@@ -30,8 +30,8 @@ public class ExcelWriter {
     public void writeToExcel(List<List<String>> databaseData, String fileName, String sheetName) throws IOException, InvalidFormatException {
         //Blank workbook
 //        XSSFWorkbook workbook = new XSSFWorkbook();
-        String filPath = System.getProperty("user.dir" + "/src/test/resources/data-files/" + fileName + ".xlsx");
-        FileInputStream inputStream = new FileInputStream(fileName);
+        String filePath = System.getProperty("user.dir") + "/src/test/resources/data-files/" + fileName + ".xlsx";
+        FileInputStream inputStream = new FileInputStream(filePath);
         XSSFWorkbook workbook = XSSFWorkbookFactory.createWorkbook(OPCPackage.open(inputStream));
         //Create a blank sheet
 //        XSSFSheet sheet = workbook.createSheet(sheetName);
@@ -49,7 +49,7 @@ public class ExcelWriter {
         try
         {
             //Write the workbook in file system
-            FileOutputStream out = new FileOutputStream(filPath);
+            FileOutputStream out = new FileOutputStream(filePath);
             workbook.write(out);
             out.close();
         }
