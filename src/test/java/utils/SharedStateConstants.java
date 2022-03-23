@@ -11,7 +11,11 @@ public enum SharedStateConstants {
     public enum FRONTEND {
         URL,
         RESPONSE,
-        WEBDRIVER
+        WEBDRIVER,
+        EXCEL_DATA,
+        LINK_TEXT,
+        DRIVER_TABS,
+        CAST_AND_CREW
     }
 
 }
