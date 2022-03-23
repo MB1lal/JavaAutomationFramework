@@ -12,6 +12,7 @@ public class InternetCheckSteps extends BaseSteps{
 
     @Given("User has internet connectivity")
     public void checkInternetConnectivity() throws IOException {
+        logger.info("Checking internet connectivity");
         URL url = new URL("https://www.google.com/");
         URLConnection connection = url.openConnection();
         boolean isConnected;
