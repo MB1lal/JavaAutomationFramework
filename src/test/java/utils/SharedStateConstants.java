@@ -14,7 +14,8 @@ public enum SharedStateConstants {
         WEBDRIVER,
         EXCEL_DATA,
         LINK_TEXT,
-        DRIVER_TABS
+        DRIVER_TABS,
+        CAST_AND_CREW
     }
 
 }

@@ -21,6 +21,7 @@
       Then User picks the following details:
       | Name        |
       | Screen Name |
-      | Appaerances |
+      | Appearances |
+      And User exports all the data into "Series Cast" sheet
 
 
