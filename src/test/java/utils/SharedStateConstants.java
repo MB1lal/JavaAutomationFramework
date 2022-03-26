@@ -5,7 +5,9 @@ public enum SharedStateConstants {
     GENERAL;
 
     public enum BACKEND {
-        PET_RESPONSE
+        PET_RESPONSE,
+        PET_ID,
+        PET_STATUS
     }
 
     public enum FRONTEND {
