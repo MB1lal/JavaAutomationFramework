@@ -25,11 +25,10 @@ public class PetsSteps extends BaseSteps{
 
     @Given("I add the pet with id = {int}")
     public void addAPet(int petId) throws IOException {
-        PetModel petModel = getStaticBody(
-                PetModel.class, EnvSerenity.petFileBodiesRoot + "new-pet.json"
-        );
+        PetModel petModel = createPetPayloadUsingFile();
+        logger.info("setting petId into the payload.");
         petModel.setId(petId);
-
+        logger.info("Adding the pet using api.");
         addANewPet(petModel);
     }
 
@@ -63,9 +62,7 @@ public class PetsSteps extends BaseSteps{
 
     @Given("I add the pet with status = {}")
     public void addAPet(String status) throws IOException {
-        PetModel petModel = getStaticBody(
-                PetModel.class, EnvSerenity.petFileBodiesRoot + "new-pet.json"
-        );
+        PetModel petModel = createPetPayloadUsingFile();
         petModel.setStatus(status);
         addANewPet(petModel);
     }
