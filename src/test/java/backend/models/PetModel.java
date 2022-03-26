@@ -3,10 +3,14 @@ package backend.models;
 import lombok.Data;
 import utils.ToJson;
 
+import java.util.ArrayList;
+
 @Data
 public class PetModel implements ToJson {
-
-    private Category category;
-    private Tag tag;
-    private Root root;
+    public long id;
+    public Category category;
+    public String name;
+    public ArrayList<String> photoUrls;
+    public ArrayList<Tag> tags;
+    public String status;
 }
