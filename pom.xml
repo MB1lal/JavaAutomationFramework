@@ -12,8 +12,8 @@
         <maven.compiler.source>16</maven.compiler.source>
         <maven.compiler.target>16</maven.compiler.target>
         <serenity.version>3.2.0</serenity.version>
-        <serenity.cucumber6.version>2.6.0</serenity.cucumber6.version>
-        <cucumber.version>6.11.0</cucumber.version>
+        <serenity.cucumber.version>3.2.1</serenity.cucumber.version>
+        <cucumber.version>7.2.3</cucumber.version>
     </properties>
 
     <profiles>
@@ -93,8 +93,8 @@
         </dependency>
         <dependency>
             <groupId>net.serenity-bdd</groupId>
-            <artifactId>serenity-cucumber6</artifactId>
-            <version>${serenity.cucumber6.version}</version>
+            <artifactId>serenity-cucumber</artifactId>
+            <version>${serenity.cucumber.version}</version>
         </dependency>
         <dependency>
             <groupId>io.cucumber</groupId>
