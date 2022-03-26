@@ -11,6 +11,7 @@ import org.jeasy.random.EasyRandom;
 import org.jeasy.random.EasyRandomParameters;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.Random;
 import static utils.SharedStateConstants.BACKEND.PET_ID;
 import static utils.SharedStateConstants.BACKEND.PET_RESPONSE;
@@ -54,8 +55,7 @@ public abstract class BaseSteps {
             petConnector.getPetById((int) petId));
     }
 
-    public void getPetStatus(String status) {
-        //ToDo - Fix the following method to accommodate multiple statuses
+    public void getPetStatus(List<String> status) {
         Serenity.setSessionVariable(PET_RESPONSE).to(
                 petConnector.getPetStatus(status));
     }

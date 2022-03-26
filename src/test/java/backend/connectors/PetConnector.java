@@ -5,6 +5,9 @@ import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import net.serenitybdd.rest.SerenityRest;
+
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class PetConnector {
@@ -29,7 +32,7 @@ public class PetConnector {
                 .get("/" + id);
     }
 
-    public Response getPetStatus(String status) {
+    public Response getPetStatus(List<String> status) {
         Response response = baseRequest()
                 .param("status", status)
                 .get("/findByStatus");
