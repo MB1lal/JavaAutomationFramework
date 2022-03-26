@@ -22,12 +22,6 @@
         <Logger name="frontend.steps.BaseSteps" level="trace" additivity="false">
             <AppenderRef ref="LogToConsole"/>
         </Logger>
-        <Logger name="SplitOrderReport.Driver.SORRunner" level="trace" additivity="false">
-            <AppenderRef ref="LogToConsole"/>
-        </Logger>
-        <Logger name="Utilities.Properties.PropertiesReader" level="trace" additivity="false">
-            <AppenderRef ref="LogToConsole"/>
-        </Logger>
         <Root level="error">
 <!--            <AppenderRef ref="LogToFile"/>-->
             <AppenderRef ref="LogToConsole"/>
