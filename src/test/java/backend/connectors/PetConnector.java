@@ -4,11 +4,13 @@ import core.EnvSerenity;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import net.serenitybdd.core.Serenity;
 import net.serenitybdd.rest.SerenityRest;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static utils.SharedStateConstants.BACKEND.PET_ID;
 
 public class PetConnector {
 
@@ -47,6 +49,17 @@ public class PetConnector {
 
         assertThat(response.statusCode())
                 .as("Status code for deletion api")
+                .isEqualTo(200);
+    }
+
+    public void updatePetDetails(String attribute, String attributeValue) {
+        Response response = baseRequest()
+                .header("Content-Type", ContentType.URLENC)
+                .formParam(attribute, attributeValue)
+                .post("/" + Serenity.sessionVariableCalled(PET_ID));
+
+        assertThat(response.statusCode())
+                .as("Status code for updating api")
                 .isEqualTo(200);
     }
 }

@@ -68,14 +68,19 @@ public class PetsSteps extends BaseSteps {
     @Then("The pet has status = {}")
     public void assertingPetWithStatus(String status) {
         Response response = Serenity.sessionVariableCalled(PET_RESPONSE);
-        PetModel[] petResponse = response.as(PetModel[].class);
-        logger.info("Asserting the pet status in response.");
-        assertThat(Arrays.stream(petResponse).anyMatch(pets -> pets.getId() == (long) Serenity.sessionVariableCalled(PET_ID)))
-                .withFailMessage("No pet with id = " + Serenity.sessionVariableCalled(PET_ID) + " exists.")
-                .isTrue();
+        PetModel petModel;
+        if (response.getBody().asString().startsWith("{")) {
+            petModel = response.as(PetModel.class);
+        }
+        else {
+            PetModel[] petResponse = response.as(PetModel[].class);
+            logger.info("Asserting the pet status in response.");
+            assertThat(Arrays.stream(petResponse).anyMatch(pets -> pets.getId() == (long) Serenity.sessionVariableCalled(PET_ID)))
+                    .withFailMessage("No pet with id = " + Serenity.sessionVariableCalled(PET_ID) + " exists.")
+                    .isTrue();
 
-        PetModel petModel = Arrays.stream(petResponse).filter(pets -> pets.getId() == (long) Serenity.sessionVariableCalled(PET_ID)).findFirst().get();
-
+            petModel = Arrays.stream(petResponse).filter(pets -> pets.getId() == (long) Serenity.sessionVariableCalled(PET_ID)).findFirst().get();
+        }
         assertThat(petModel.getStatus())
                 .withFailMessage("No pet with status = " + status + " exists.")
                 .isEqualTo(status);
@@ -85,6 +90,11 @@ public class PetsSteps extends BaseSteps {
     public void deletingThePetWithId(long id) {
         logger.info("Deletion api is called for id = " + id);
         deletePetWithId(id);
+    }
+
+    @And("I update the pet {} to {}")
+    public void updatingPetDetails(String attribute,String attributeValue) {
+        updatePetDetails(attribute, attributeValue);
     }
 
 }

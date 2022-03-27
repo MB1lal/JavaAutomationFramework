@@ -9,6 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jeasy.random.EasyRandom;
 import org.jeasy.random.EasyRandomParameters;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -64,6 +65,10 @@ public abstract class BaseSteps {
         petConnector.deletePetWithId((int) petId);
     }
 
+    public void updatePetDetails(String attribute, String attributeValue) {
+        petConnector.updatePetDetails(attribute, attributeValue);
+
+    }
 
 
 }

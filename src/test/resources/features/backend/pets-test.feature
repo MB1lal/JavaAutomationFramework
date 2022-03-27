@@ -20,3 +20,12 @@
       And I call the pet deletion api with id = 10002
       When I call the pet api with id = 10002
       Then The pet with id = 10002 doesn't exist
+
+
+    Scenario: Verifying pet details are correctly updated
+      Given I add the pet with id = 10001
+      And I update the pet name to Unicorn
+      And I update the pet status to sold
+      When I call the pet api with id
+      Then The pet with id = 10001 exists
+      And The pet has status = sold
