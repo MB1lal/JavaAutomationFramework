@@ -14,19 +14,43 @@
         <serenity.version>3.2.0</serenity.version>
         <serenity.cucumber.version>3.2.1</serenity.cucumber.version>
         <cucumber.version>7.2.3</cucumber.version>
+        <parallel.tests>3</parallel.tests>
     </properties>
 
     <profiles>
         <profile>
-            <id>backendTests</id>
+            <id>dontUseTheForks</id>
             <build>
                 <plugins>
                     <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-failsafe-plugin</artifactId>
                         <version>3.0.0-M5</version>
                         <configuration>
-                           <test>runner.backendTestRunner</test>
+                            <includes>
+                                <include>**/backendTestRunner.java</include>
+                            </includes>
+<!--                            <test>**/SlicedTestRunner1.java</test>-->
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>useTheForks</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <version>3.0.0-M5</version>
+                        <configuration>
+                            <includes>
+                                <include>**/SlicedTestRunner*.java</include>
+                            </includes>
+                            <systemPropertyVariables>
+                                <serenity.fork.count>0${parallel.tests}</serenity.fork.count>
+                                <!--suppress UnresolvedMavenProperty -->
+                                <serenity.fork.number>0${surefire.forkNumber}</serenity.fork.number>
+                            </systemPropertyVariables>
                         </configuration>
                     </plugin>
                 </plugins>
@@ -51,23 +75,33 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
+                <artifactId>maven-failsafe-plugin</artifactId>
                 <version>3.0.0-M5</version>
                 <configuration>
-                    <test>runner.backendTestRunner</test>
+                    <includes>
+                        <include>**/SlicedTestRunner*.java</include>
+                    </includes>
+                    <systemPropertyVariables>
+<!--                        <webdriver.base.url>${webdriver.base.url}</webdriver.base.url>-->
+                    </systemPropertyVariables>
+                    <parallel>classes</parallel>
+                    <threadCount>${parallel.tests}</threadCount>
+                    <forkCount>${parallel.tests}</forkCount>
                 </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
 
 
     <dependencies>
-        <dependency>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <version>3.0.0-M5</version>
-        </dependency>
         <dependency>
             <groupId>net.serenity-bdd</groupId>
             <artifactId>serenity-core</artifactId>
