@@ -1,4 +1,4 @@
-package runner;
+package runner.parallelRunners;
 
 
 import io.cucumber.junit.CucumberOptions;
@@ -15,5 +15,5 @@ import org.junit.runner.RunWith;
                 "json:target/cucumber-report/cucumber.json"
         }
 )
-public class backendTestRunner {
+public class SlicedTestRunner2 {
 }

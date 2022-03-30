@@ -1,4 +1,4 @@
-package backend.models;
+package backend.models.pet;
 
 import lombok.Data;
 
