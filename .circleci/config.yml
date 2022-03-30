@@ -1,7 +1,8 @@
 # Use the latest 2.1 version of CircleCI pipeline process engine.
 # See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
-
+orbs:
+  browser-tools: circleci/browser-tools@1.2.5
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
@@ -15,9 +16,12 @@ jobs:
       - image: cimg/openjdk:16.0
     # Add steps to the job
     # See: https://circleci.com/docs/2.0/configuration-reference/#steps
+#    working_directory: /target/site
+#    parallelism: 4
     steps:
       # Checkout the code as the first step.
       - checkout
+      - browser-tools/install-browser-tools
       # Use mvn clean and package as the standard maven build phase
 #      - run:
 #          name: Build
@@ -25,16 +29,23 @@ jobs:
       # Then run your tests!
       - run:
           name: Test
-          command: mvn clean test -P backendTests
+          command: mvn clean verify -P dontUseTheForks
+
+      - store_test_results:
+          path: target/cucumber-report/
 
       - run:
           name: Report
           command:  mvn serenity:aggregate
 
+      - store_artifacts:
+          path: target/site/serenity/
+          destination: AutomationPractice
+
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
-  BackendTests: # This is the name of the workflow, feel free to change it to better match your workflow.
+  AllTests: # This is the name of the workflow, feel free to change it to better match your workflow.
     # Inside the workflow, you define the jobs you want to run.
     jobs:
       - test-and-report
