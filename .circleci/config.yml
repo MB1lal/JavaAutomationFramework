@@ -33,7 +33,7 @@ jobs:
           command:  mvn serenity:aggregate
 
       - store_artifacts:
-          path: target/site/serenity/index.html
+          path: target/site/serenity/
           destination: AutomationPractice
 
 # Invoke jobs via workflows
