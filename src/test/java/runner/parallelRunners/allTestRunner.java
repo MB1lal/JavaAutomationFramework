@@ -6,8 +6,8 @@ import org.junit.runner.RunWith;
 
 @RunWith(CucumberWithSerenity.class)
 @CucumberOptions(
-        features = {"src/test/resources/features/backend"},
-        glue = {"backend"},
+        features = {"src/test/resources/features"},
+        glue = {""},
         tags = "@test and not @ignore",
         plugin = {
                 "json:target/cucumber-report/cucumber.json"
