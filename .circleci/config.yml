@@ -32,7 +32,7 @@ jobs:
           command: mvn clean verify -P dontUseTheForks
 
       - store_test_results:
-          path: target/cucumber-report/cucumber.json
+          path: target/cucumber-report/
 
       - run:
           name: Report
