@@ -13,9 +13,9 @@ import java.util.Arrays;
 import java.util.Collections;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static utils.SharedStateConstants.BACKEND.PET.PET_RESPONSE;
+import static utils.SharedStateConstants.BACKEND.PET.PET_STATUS;
 import static utils.SharedStateConstants.BACKEND.PET_ID;
-import static utils.SharedStateConstants.BACKEND.PET_RESPONSE;
-import static utils.SharedStateConstants.BACKEND.PET_STATUS;
 
 public class PetsSteps extends BaseSteps {
 

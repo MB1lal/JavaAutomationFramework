@@ -7,9 +7,9 @@ import utils.ToJson;
 
 @Data
 public class PetStoreModel implements ToJson {
-    public int id = 10;
-    public int petId = 2008;
-    public int quantity = 4;
+    public int id;
+    public int petId;
+    public int quantity;
     @Randomizer(TimestampGenerator.class)
     public String shipDate;
     public String status = "placed";

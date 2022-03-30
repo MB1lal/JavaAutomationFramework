@@ -11,6 +11,6 @@ public class TimestampGenerator implements Randomizer<String> {
 
     @Override
     public String getRandomValue() {
-        return null;
+        return Instant.now().toString();
     }
 }

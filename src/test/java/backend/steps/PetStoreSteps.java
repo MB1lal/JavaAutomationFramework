@@ -1,18 +1,17 @@
 package backend.steps;
 
 import backend.models.store.PetStoreModel;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.response.Response;
 import net.serenitybdd.core.Serenity;
 
-import java.io.IOException;
-import java.time.Instant;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static utils.SharedStateConstants.BACKEND.PET_ORDER_ID;
-import static utils.SharedStateConstants.BACKEND.PET_STORE_RESPONSE;
+import static utils.SharedStateConstants.BACKEND.PET_STORE.PET_ORDER_ID;
+import static utils.SharedStateConstants.BACKEND.PET_STORE.PET_STORE_RESPONSE;
 
 public class PetStoreSteps extends BaseSteps {
 
@@ -38,4 +37,16 @@ public class PetStoreSteps extends BaseSteps {
                 .withFailMessage("The order Id is not found.")
                 .isEqualTo(Serenity.sessionVariableCalled(PET_ORDER_ID));
     }
+
+    @When("I delete the order by id = {int}")
+    public void deleteByOrderId(int orderId) {
+        deleteOrderById(orderId);
+    }
+
+    @And("The order with id = {int} shouldn't exist")
+    public void assertOrderDoesNotExist(int orderId) {
+        fetchDeletedOrder(orderId);
+    }
+
+
 }

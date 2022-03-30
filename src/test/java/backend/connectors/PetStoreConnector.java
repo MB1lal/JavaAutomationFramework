@@ -31,4 +31,21 @@ public class PetStoreConnector {
                 .statusCode(200)
                 .extract().response();
     }
+
+    public void fetchInvalidOrder(int orderId) {
+         baseRequest()
+                .get("/order/" + orderId)
+                .then()
+                .assertThat()
+                .statusCode(404);
+    }
+
+    public void deleteOrderById(int orderId) {
+         baseRequest()
+                .delete("/order/" + orderId)
+                .then()
+                .assertThat()
+                 .statusCode(200);
+    }
+
 }
