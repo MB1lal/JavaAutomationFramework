@@ -26,7 +26,7 @@ jobs:
       # Then run your tests!
       - run:
           name: Test
-          command:  mvn clean verify -Dserenity.batch.count=3 -Dserenity.batch.number=3 -P useTheForks
+          command: mvn clean test -P dontUseTheForks
 
       - run:
           name: Report
