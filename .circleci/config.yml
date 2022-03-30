@@ -38,8 +38,12 @@ jobs:
           name: Report
           command:  mvn serenity:aggregate
 
+      - run:
+          name: Compress Artifacts
+          command: tar -cvzf myartifact.tar target/site/serenity
+
       - store_artifacts:
-          path: target/site/serenity/
+          path: myartifact.tar
           destination: AutomationPractice
 
 # Invoke jobs via workflows

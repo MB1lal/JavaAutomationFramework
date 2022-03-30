@@ -3,6 +3,7 @@ package frontend.pages;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.pages.PageObject;
+import org.apache.commons.lang3.SystemUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -73,7 +74,14 @@ public class GooglePages extends PageObject {
 
     public void openLinkInANewTab(String linkText) {
         WebElement partialLinkText = driver.findElement(By.partialLinkText(linkText));
-        String keys = Keys.chord(Keys.COMMAND, Keys.ENTER);
+        String keys;
+        if(SystemUtils.OS_NAME.contains("Mac")) {
+            keys = Keys.chord(Keys.COMMAND, Keys.ENTER);
+        }
+        else {
+            keys = Keys.chord(Keys.CONTROL, Keys.ENTER);
+        }
+
         partialLinkText.sendKeys(keys);
         List<String> windows = driver.getWindowHandles().stream().toList();
         driver.switchTo().window(windows.get(1));
