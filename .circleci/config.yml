@@ -37,6 +37,9 @@ jobs:
           path: target/site/serenity/
           destination: AutomationPractice
 
+      - store_test_results:
+          path: target/cucumber-report
+
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
