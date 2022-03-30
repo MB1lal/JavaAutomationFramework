@@ -26,7 +26,7 @@ jobs:
       # Then run your tests!
       - run:
           name: Test
-          command: mvn clean test -P backendTests
+          command:  mvn clean verify -Dserenity.batch.count=3 -Dserenity.batch.number=3 -P useTheForks
 
       - run:
           name: Report
