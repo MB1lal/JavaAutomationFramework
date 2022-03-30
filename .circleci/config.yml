@@ -27,7 +27,7 @@ jobs:
       # Then run your tests!
       - run:
           name: Test
-          command: mvn clean test -P dontUseTheForks
+          command: mvn clean verify -P dontUseTheForks
 
       - run:
           name: Report
