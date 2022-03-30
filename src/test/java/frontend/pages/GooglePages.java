@@ -73,7 +73,14 @@ public class GooglePages extends PageObject {
 
     public void openLinkInANewTab(String linkText) {
         WebElement partialLinkText = driver.findElement(By.partialLinkText(linkText));
-        String keys = Keys.chord(Keys.COMMAND, Keys.ENTER);
+        String keys;
+        if(System.getProperty("os.name").contains("MAC")) {
+            keys = Keys.chord(Keys.COMMAND, Keys.ENTER);
+        }
+        else {
+            keys = Keys.chord(Keys.CONTROL, Keys.ENTER);
+        }
+
         partialLinkText.sendKeys(keys);
         List<String> windows = driver.getWindowHandles().stream().toList();
         driver.switchTo().window(windows.get(1));
