@@ -1,7 +1,9 @@
 package backend.steps;
 
 import backend.connectors.PetConnector;
-import backend.models.PetModel;
+import backend.connectors.PetStoreConnector;
+import backend.models.pet.PetModel;
+import backend.models.store.PetStoreModel;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import core.EnvSerenity;
 import net.serenitybdd.core.Serenity;
@@ -15,13 +17,17 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 import static utils.SharedStateConstants.BACKEND.PET_ID;
+import static utils.SharedStateConstants.BACKEND.PET_ORDER_ID;
 import static utils.SharedStateConstants.BACKEND.PET_RESPONSE;
 import static utils.SharedStateConstants.BACKEND.PET_STATUS;
+import static utils.SharedStateConstants.BACKEND.PET_STORE_RESPONSE;
 
 public abstract class BaseSteps {
 
     public static final ObjectMapper objectMapper = new ObjectMapper();
     private final PetConnector petConnector = new PetConnector();
+    private final PetStoreConnector petStoreConnector = new PetStoreConnector();
+
     public static final Logger logger = LogManager.getLogger(BaseSteps.class);
 
     public EasyRandom random = new EasyRandom(
@@ -35,9 +41,15 @@ public abstract class BaseSteps {
         return random.nextObject(PetModel.class);
     }
     public PetModel createPetPayloadUsingFile() throws IOException {
-        logger.info("Creating a pet payload using sameple json file");
+        logger.info("Creating a pet payload using sample json file");
         return getStaticBody(
             PetModel.class, EnvSerenity.petFileBodiesRoot + "new-pet.json");
+    }
+
+    public PetStoreModel createPetStorePayload() {
+//        return getStaticBody(
+//                PetStoreModel.class, EnvSerenity.petFileBodiesRoot + "new-pet-store.json");
+        return random.nextObject(PetStoreModel.class);
     }
 
     public static <T> T getStaticBody(Class<T> tClass, String path) throws IOException {
@@ -70,5 +82,14 @@ public abstract class BaseSteps {
 
     }
 
+    public void placePetStoreOrder(PetStoreModel petStoreModel) {
+        Serenity.setSessionVariable(PET_ORDER_ID).to(petStoreModel.getId());
+        petStoreConnector.placingAnOrder(petStoreModel.toJson());
+    }
+
+    public void fetchPetStoreOrderDetails(int orderId) {
+        Serenity.setSessionVariable(PET_STORE_RESPONSE).
+                to(petStoreConnector.fetchOrder(orderId));
+    }
 
 }

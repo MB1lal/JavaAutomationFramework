@@ -1,6 +1,6 @@
 package backend.steps;
 
-import backend.models.PetModel;
+import backend.models.pet.PetModel;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
