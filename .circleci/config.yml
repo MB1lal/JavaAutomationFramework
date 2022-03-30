@@ -32,12 +32,9 @@ jobs:
           name: Report
           command:  mvn serenity:aggregate
 
-      - run:
-          name: UploadReport
-          command: echo "/home/circleci/project/target/site/serenity" > /backend-report;
-
       - store_artifacts:
-          path: /backend-report/
+          path: test-reports/
+          destination: /target/site
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
