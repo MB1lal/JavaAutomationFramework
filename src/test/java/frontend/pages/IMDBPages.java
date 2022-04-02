@@ -26,6 +26,8 @@ public class IMDBPages extends PageObject {
     @FindBy(xpath = "//*[@id='fullcredits_content']/table[3]/tbody/tr")
     WebElement castTable;
 
+    By castTableRow = By.xpath("//*[@id='fullcredits_content']/table[3]/tbody/tr");
+
     public void pageHasLogo() {
         pageLogo.withTimeoutOf(Duration.ofSeconds(3));
         pageLogo.isDisplayed();
@@ -43,7 +45,7 @@ public class IMDBPages extends PageObject {
 
     public List<List<String>> getCastTableData() {
         List<List<String>> castTableData = new ArrayList<>();
-        List<WebElement> tableData = driver.findElements(By.xpath("//*[@id='fullcredits_content']/table[3]/tbody/tr"));
+        List<WebElement> tableData = driver.findElements(castTableRow);
         List<String> rows = new ArrayList<>();
 
         for (WebElement tableDatum : tableData) {
@@ -52,7 +54,7 @@ public class IMDBPages extends PageObject {
             }
         }
        for (int i=0; i<rows.size(); i++) {
-           Scanner s = new Scanner(rows.get(i)).useDelimiter("\\t|\\n");
+           Scanner s = new Scanner(rows.get(i)).useDelimiter("[\\t\\n]");
            castTableData.add(new ArrayList<>());
            for(int j=0;j<4;j++) {
                String rowText = s.next();
