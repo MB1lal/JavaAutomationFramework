@@ -4,13 +4,13 @@
     Background: Check for internet connectivity
       Given User has internet connectivity
 
-    @ignore
+
     Scenario: Navigating to Google
       Given User opens a browser
       Then The page is loaded
 
     @excelData
-    Scenario: Navigating to google.com
+    Scenario: Saving cast of a series from imdb by using google
       Given User opens a browser
       And The page is loaded
       And User searches for value in "B2" of provided sheet

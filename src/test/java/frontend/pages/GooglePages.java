@@ -12,9 +12,7 @@ import org.openqa.selenium.WindowType;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import java.time.Duration;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 
 @DefaultUrl("page:googleURL")
@@ -46,7 +44,7 @@ public class GooglePages extends PageObject {
         searchButton.click();
     }
 
-    public void rightClickOnThelink(String linkText) {
+    public void rightClickOnTheLink(String linkText) {
         Actions actions = new Actions(driver);
         WebElement partialLinkText = driver.findElement(By.partialLinkText(linkText));
         url = partialLinkText.getAttribute("baseUri");
@@ -60,7 +58,6 @@ public class GooglePages extends PageObject {
 
     //Deprecated
 //    public void openInANewTab() {
-//        WebDriver driver = super.getDriver();
 //        Actions actions = new Actions(driver);
 //        actions.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ENTER).build().perform();
 //        ArrayList<String> tab = new ArrayList<>(driver.getWindowHandles());
