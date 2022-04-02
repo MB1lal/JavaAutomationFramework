@@ -43,7 +43,7 @@
                         <!--suppress UnresolvedMavenProperty -->
                         <webdriver.base.url>${webdriver.base.url}</webdriver.base.url>
                     </systemPropertyVariables>
-                    <parallel>classesAndMethods</parallel>
+                    <parallel>methods</parallel>
                     <useUnlimitedThreads>true</useUnlimitedThreads>
                     <threadCount>8</threadCount>
                     <threadCountClasses>3</threadCountClasses>
