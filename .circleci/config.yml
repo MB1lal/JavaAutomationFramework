@@ -22,21 +22,16 @@ jobs:
       # Checkout the code as the first step.
       - checkout
       - browser-tools/install-browser-tools
-      # Use mvn clean and package as the standard maven build phase
-#      - run:
-#          name: Build
-#          command: mvn -B -DskipTests clean package
-      # Then run your tests!
       - run:
           name: Test
-          command: mvn clean verify
+          command: mvn -ntp clean verify -Dfailsafe.rerunFailingTestsCount=2
 
       - store_test_results:
           path: target/cucumber-report/
 
       - run:
           name: Report
-          command:  mvn serenity:aggregate
+          command:  mvn -ntp serenity:aggregate
 
       - run:
           name: Compress Artifacts
