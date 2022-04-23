@@ -16,6 +16,17 @@ public enum SharedStateConstants {
             PET_RESPONSE,
             PET_STATUS
         }
+        public enum USERS {
+            USERNAME,
+            FIRST_NAME,
+            LAST_NAME,
+            USER_ID,
+            EMAIL,
+            PASSWORD,
+            STATUS,
+            PHONE,
+            USER_RESPONSE
+        }
     }
 
     public enum FRONTEND {
