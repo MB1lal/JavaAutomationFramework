@@ -1,4 +1,4 @@
-@test
+@test @imdb @ignore
   Feature: Searching a term on google
 
     Background: Check for internet connectivity
@@ -6,12 +6,12 @@
 
 
     Scenario: Navigating to Google
-      Given User opens a browser
+      Given User navigates to Google
       Then The page is loaded
 
     @excelData
     Scenario: Saving cast of a series from imdb by using google
-      Given User opens a browser
+      Given User navigates to Google
       And The page is loaded
       And User searches for value in "B2" of provided sheet
       And User finds the link present in "B3" of provided sheet

@@ -28,7 +28,7 @@ public class GooglePages extends PageObject {
     WebElementFacade searchButton;
 
     String url;
-    WebDriver driver = super.getDriver();
+    private final WebDriver driver = super.getDriver();
 
 
     public void pageHasLogo() {
@@ -82,5 +82,15 @@ public class GooglePages extends PageObject {
         partialLinkText.sendKeys(keys);
         List<String> windows = driver.getWindowHandles().stream().toList();
         driver.switchTo().window(windows.get(1));
+    }
+
+    public void clicksOnPartialLinkText(String partialLinkText) {
+        WebElement partialLinkTextElement = driver.findElement(By.partialLinkText(partialLinkText));
+        partialLinkTextElement.click();
+    }
+
+    public void clicksOnLinkText(String linkText) {
+        WebElement linkTextElement = driver.findElement(By.partialLinkText(linkText));
+        linkTextElement.click();
     }
 }

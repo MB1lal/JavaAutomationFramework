@@ -11,9 +11,9 @@
     <properties>
         <maven.compiler.source>16</maven.compiler.source>
         <maven.compiler.target>16</maven.compiler.target>
-        <serenity.version>3.2.3</serenity.version>
-        <serenity.cucumber.version>3.2.3</serenity.cucumber.version>
-        <cucumber.version>7.2.3</cucumber.version>
+        <serenity.version>3.2.5</serenity.version>
+        <serenity.cucumber.version>3.2.5</serenity.cucumber.version>
+        <cucumber.version>7.3.3</cucumber.version>
     </properties>
 
     <build>
@@ -103,7 +103,7 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>4.1.3</version>
+            <version>4.1.4</version>
         </dependency>
 
         <dependency>
