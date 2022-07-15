@@ -24,11 +24,9 @@ public class PetsSteps extends BaseSteps {
         PetModel petModel = createPetPayloadUsingFile();
         switch(param.toLowerCase()) {
             case "id" -> {
-                logger.info("Setting petId into the payload.");
                 petModel.setId(Long.parseLong(paramValue));
             }
             case "status" -> {
-                logger.info("Setting status into the payload.");
                 petModel.setStatus(paramValue);
             }
         }
@@ -38,7 +36,6 @@ public class PetsSteps extends BaseSteps {
     @And("The pet with id = {int} {}")
     public void assertingPetWithId(int petId, String result) {
         Response response = Serenity.sessionVariableCalled(PET_RESPONSE);
-        logger.info("Asserting the petId response.");
         switch (result) {
             case "exists" -> {
                 assertThat(response.statusCode())
@@ -58,7 +55,6 @@ public class PetsSteps extends BaseSteps {
 
     @When("I call the pet api with {}")
     public void callingApiWithId(String callingParameter) {
-        logger.info("Calling the pet api with " + callingParameter + ".");
         switch (callingParameter.toLowerCase()) {
             case "id" -> getPetById(Serenity.sessionVariableCalled(PET_ID));
             case "status" -> getPetStatus(Collections.singletonList(Serenity.sessionVariableCalled(PET_STATUS)));
@@ -74,7 +70,6 @@ public class PetsSteps extends BaseSteps {
         }
         else {
             PetModel[] petResponse = response.as(PetModel[].class);
-            logger.info("Asserting the pet status in response.");
             assertThat(Arrays.stream(petResponse).anyMatch(pets -> pets.getId() == (long) Serenity.sessionVariableCalled(PET_ID)))
                     .withFailMessage("No pet with id = " + Serenity.sessionVariableCalled(PET_ID) + " exists.")
                     .isTrue();
@@ -88,7 +83,6 @@ public class PetsSteps extends BaseSteps {
 
     @When("I call the pet deletion api with id = {int}")
     public void deletingThePetWithId(long id) {
-        logger.info("Deletion api is called for id = " + id);
         deletePetWithId(id);
     }
 
