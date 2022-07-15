@@ -1,4 +1,4 @@
-@test @imdb @ignore
+@test @imdb
   Feature: Searching a term on google
 
     Background: Check for internet connectivity
