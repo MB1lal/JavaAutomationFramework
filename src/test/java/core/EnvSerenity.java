@@ -1,6 +1,6 @@
 package core;
 
-public class EnvSerenity extends config {
+public class EnvSerenity extends Config {
 
     //bootstrap
     public static final String basePetURI = environmentVariables.getProperty("baseURI") + "pet";

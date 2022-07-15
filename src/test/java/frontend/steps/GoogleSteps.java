@@ -16,7 +16,7 @@ public class GoogleSteps extends BaseSteps{
     IMDBPages iMDBPages;
     List<List<String>> excelData;
 
-    @Given("User opens a browser")
+    @Given("User navigates to Google")
     public void openingABrowser() {
         googlePages.open();
     }
