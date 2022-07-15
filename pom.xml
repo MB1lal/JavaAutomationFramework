@@ -14,7 +14,32 @@
         <serenity.version>3.2.5</serenity.version>
         <serenity.cucumber.version>3.2.5</serenity.cucumber.version>
         <cucumber.version>7.3.3</cucumber.version>
+        <parallel.tests>3</parallel.tests>
     </properties>
+
+    <profiles>
+        <profile>
+            <id>useTheForks</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <version>3.0.0-M7</version>
+                        <configuration>
+                            <includes>
+                                <include>**/SlicedTestRunner*.java</include>
+                            </includes>
+                            <systemPropertyVariables>
+                                <serenity.fork.count>0${parallel.tests}</serenity.fork.count>
+                                <!--suppress UnresolvedMavenProperty -->
+                                <serenity.fork.number>0${surefire.forkNumber}</serenity.fork.number>
+                            </systemPropertyVariables>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
     <build>
         <plugins>
@@ -33,20 +58,22 @@
 <!--                </executions>-->
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>3.0.0-M5</version>
+                <version>3.0.0-M7</version>
                 <configuration>
                     <includes>
-                        <include>**/allTestRunner.java</include>
+                        <include>**/SlicedTestRunner1.java</include>
                     </includes>
                     <systemPropertyVariables>
                         <!--suppress UnresolvedMavenProperty -->
                         <webdriver.base.url>${webdriver.base.url}</webdriver.base.url>
                     </systemPropertyVariables>
-                    <parallel>methods</parallel>
-                    <useUnlimitedThreads>true</useUnlimitedThreads>
-                    <threadCount>8</threadCount>
-                    <threadCountClasses>3</threadCountClasses>
+                    <parallel>classes</parallel>
+<!--                    <useUnlimitedThreads>true</useUnlimitedThreads>-->
+                    <threadCount>${parallel.tests}</threadCount>
+                    <forkCount>${parallel.tests}</forkCount>
+<!--                    <threadCountClasses>3</threadCountClasses>-->
                 </configuration>
                 <executions>
                     <execution>
