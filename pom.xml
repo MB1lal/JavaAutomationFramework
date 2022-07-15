@@ -14,7 +14,32 @@
         <serenity.version>3.2.5</serenity.version>
         <serenity.cucumber.version>3.2.5</serenity.cucumber.version>
         <cucumber.version>7.3.3</cucumber.version>
+        <parallel.tests>4</parallel.tests>
     </properties>
+
+    <profiles>
+        <profile>
+            <id>useTheForks</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-failsafe-plugin</artifactId>
+                        <version>3.0.0-M7</version>
+                        <configuration>
+                            <includes>
+                                <include>**/SlicedTestRunner*.java</include>
+                            </includes>
+                            <systemPropertyVariables>
+                                <serenity.fork.count>0${parallel.tests}</serenity.fork.count>
+                                <!--suppress UnresolvedMavenProperty -->
+                                <serenity.fork.number>0${surefire.forkNumber}</serenity.fork.number>
+                            </systemPropertyVariables>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
     <build>
         <plugins>
@@ -33,20 +58,21 @@
 <!--                </executions>-->
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>3.0.0-M5</version>
+                <version>3.0.0-M7</version>
                 <configuration>
                     <includes>
-                        <include>**/allTestRunner.java</include>
+                        <include>**/SlicedTestRunner*.java</include>
                     </includes>
                     <systemPropertyVariables>
                         <!--suppress UnresolvedMavenProperty -->
                         <webdriver.base.url>${webdriver.base.url}</webdriver.base.url>
                     </systemPropertyVariables>
-                    <parallel>methods</parallel>
+                    <parallel>both</parallel>
                     <useUnlimitedThreads>true</useUnlimitedThreads>
-                    <threadCount>8</threadCount>
-                    <threadCountClasses>3</threadCountClasses>
+                    <threadCount>${parallel.tests}</threadCount>
+                    <forkCount>${parallel.tests}</forkCount>
                 </configuration>
                 <executions>
                     <execution>
@@ -98,18 +124,6 @@
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-junit</artifactId>
             <version>${cucumber.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
-            <version>4.1.4</version>
-        </dependency>
-
-        <dependency>
-            <groupId>io.github.bonigarcia</groupId>
-            <artifactId>webdrivermanager</artifactId>
-            <version>5.1.1</version>
         </dependency>
 
         <dependency>

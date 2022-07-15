@@ -56,7 +56,6 @@ public abstract class BaseSteps {
         return random.nextObject(PetModel.class);
     }
     public PetModel createPetPayloadUsingFile() throws IOException {
-        logger.info("Creating a pet payload using sample json file");
         return getStaticBody(
             PetModel.class, EnvSerenity.petFileBodiesRoot + "new-pet.json");
     }
