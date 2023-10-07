@@ -1,6 +1,6 @@
 package core;
 
-import frontend.ui.models.BrowserType;
+import ui.models.BrowserType;
 import lombok.Data;
 
 @Data
