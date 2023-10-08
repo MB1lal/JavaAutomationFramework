@@ -1,8 +1,8 @@
 package core;
 
-import net.serenitybdd.core.environment.EnvironmentSpecificConfiguration;
-import net.thucydides.core.util.EnvironmentVariables;
-import net.thucydides.core.util.SystemEnvironmentVariables;
+import net.serenitybdd.model.environment.EnvironmentSpecificConfiguration;
+import net.thucydides.model.environment.SystemEnvironmentVariables;
+import net.thucydides.model.util.EnvironmentVariables;
 
 public class Config {
     public final static EnvironmentVariables environmentVariables = SystemEnvironmentVariables.createEnvironmentVariables();
