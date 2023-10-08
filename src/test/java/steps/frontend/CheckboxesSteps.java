@@ -12,7 +12,7 @@ public class CheckboxesSteps extends BaseSteps {
 
     @When("I toggle the {} checkbox")
     public void toggleCheckbox(String index) {
-        logger.info("Selecting $index checkbox");
+        logger.info("Selecting " + index + " checkbox");
         if(index.equalsIgnoreCase("First")) {
             checkboxesPage.clickCheckbox(1);
         } else if(index.equalsIgnoreCase("Second")) {

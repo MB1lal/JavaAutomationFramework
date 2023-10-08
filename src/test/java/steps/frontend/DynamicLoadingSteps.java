@@ -25,7 +25,7 @@ public class DynamicLoadingSteps extends BaseSteps {
             logger.error("Invalid example specified");
             throw new IllegalArgumentException();
         }
-        logger.info("Navigating to $example");
+        logger.info("Navigating to " + example);
         exampleNumber = example.contains("1") ? 1 : 2;
         dynamicLoadingPage.navigateToExample(example);
     }

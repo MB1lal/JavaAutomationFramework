@@ -20,7 +20,7 @@ public class FileDownloadSteps extends BaseSteps {
     @When("I download the file {}")
     public void downloadIsPressed(String fileName) {
         this.fileName = fileName;
-        logger.info("Downloading the file $fileName");
+        logger.info("Downloading the file " + fileName);
         fileDownloadPage.downloadFile(fileName);
 
     }
@@ -29,7 +29,7 @@ public class FileDownloadSteps extends BaseSteps {
     public void verifyFileIsDownloaded() {
         logger.info("Verifying the file is downloaded");
         Path path = Paths.get(downloadPath, fileName);
-        assertThat(Files.exists(path)).as("File $fileName doesn't exist in the folder").isTrue();
+        assertThat(Files.exists(path)).as("File " + fileName + " doesn't exist in the folder").isTrue();
         logger.info("The file exists");
     }
 

@@ -18,7 +18,7 @@ public class DropdownSteps extends BaseSteps {
 
     @Then("the selected option should be {}")
     public void verifySelectedOption(String option) {
-        logger.info("Verifying $option from dropdown");
+        logger.info("Verifying " + option + " from dropdown");
         assertThat(dropdownPage.getDropdownSelectedOption())
                 .as("Selected option in incorrect")
                 .isEqualTo(option);

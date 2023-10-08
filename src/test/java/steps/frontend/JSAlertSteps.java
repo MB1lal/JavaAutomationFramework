@@ -12,19 +12,19 @@ public class JSAlertSteps extends BaseSteps {
 
     @When("I click the {} button of alert")
     public void clickJSAlertButton(String buttonText) {
-        logger.info("Clicking the $buttonText button");
+        logger.info("Clicking the " + buttonText + " button");
         jsAlertPage.triggerJSAlert(buttonText);
     }
 
     @And("I interact as {} with the {}")
     public void interactWithAlerts(String interaction, String alertType) {
-        logger.info("Interacting with $alertType as $interaction");
+        logger.info("Interacting with " + alertType + " as " + interaction);
         jsAlertPage.interactWithAlert(interaction);
     }
 
     @And("I enter {} in the prompt")
     public void enterTextIntoPrompt(String inputText) {
-        logger.info("Entering $inputText into the prompt");
+        logger.info("Entering " + inputText + " into the prompt");
         jsAlertPage.enterTextIntoAlert(inputText);
     }
 

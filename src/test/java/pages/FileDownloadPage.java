@@ -9,11 +9,11 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 public class FileDownloadPage extends PageObject {
-    private Logger logger = LogManager.getLogger(FileDownloadPage.class);
+    private final Logger logger = LogManager.getLogger(FileDownloadPage.class);
     public void downloadFile(String fileName) {
         String fileURL = this.getDriver().findElement(By.linkText(fileName)).getAttribute("href");
         String downloadDir = System.getProperty("user.dir") + "/src/test-output/downloads";
-        String command = "wget -P $downloadDir $fileURL";
+        String command = "wget -P " + downloadDir + " " + fileURL;
         try {
             // Start a new process for the command
             Process process = new ProcessBuilder(command.split(" "))

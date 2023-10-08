@@ -17,7 +17,7 @@ public class FramesSteps extends BaseSteps {
 
     @When("I navigate to {} page")
     public void navigateToXFramePage(String framePage) {
-        logger.info("Switching to $framePage");
+        logger.info("Switching to " + framePage);
         framesPage.navigateToXFramePage(framePage);
     }
 
@@ -37,7 +37,7 @@ public class FramesSteps extends BaseSteps {
 
     @Then("{} frame has {} text")
     public void verifyFrameTexts(String frameIdentifier, String expectedText) {
-        logger.info("Verifying $frameIdentifier has $expectedText text");
+        logger.info("Verifying " + frameIdentifier + " has " + expectedText + " text");
         assertThat(nestedFramesPage.getFrameText(frameIdentifier)).isEqualTo(expectedText);
     }
 }

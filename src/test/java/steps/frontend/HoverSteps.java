@@ -11,7 +11,7 @@ public class HoverSteps extends BaseSteps {
     private HoversPage hoversPage = new HoversPage();
     @When("I hover over the {} user avatar")
     public void hoverOverXUserAvatar(String userIndex) {
-        logger.info("Hovering over $userIndex user avatar");
+        logger.info("Hovering over " + userIndex + " user avatar");
         int userId = switch (userIndex) {
             case "first" -> 1;
             case "second" -> 2;
@@ -26,11 +26,11 @@ public class HoverSteps extends BaseSteps {
 
     @Then("I should see {} for the {} user")
     public void verifyInformationForXUser(String expectedUser , String userIndex) {
-        logger.info("Verifying the user information for $userIndex user");
-        int userId = switch (userIndex) {
-            case "first" -> 1;
-            case "second" -> 2;
-            case "third" -> 3;
+        logger.info("Verifying the user information for " + userIndex + " user");
+        int userId = switch (userIndex.toLowerCase()) {
+            case "first" -> 0;
+            case "second" -> 1;
+            case "third" -> 2;
             default -> {
                 logger.error("Invalid userIndex specified");
                 throw new IllegalArgumentException();
