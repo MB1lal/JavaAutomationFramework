@@ -35,7 +35,7 @@ public class HoversPage extends PageObject {
     }
 
     public String getProfileName(int userId) {
-        return this.getDriver().findElements(profileName).get(userId).toString();
+        return this.getDriver().findElements(profileName).get(userId).getText();
     }
 
 }

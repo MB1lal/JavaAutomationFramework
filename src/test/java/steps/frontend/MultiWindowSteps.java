@@ -19,7 +19,7 @@ public class MultiWindowSteps extends BaseSteps {
 
     @And("I switch to the {} tab")
     public void switchWindow(String tabId) {
-        logger.info("Switching to the $tabId tab");
+        logger.info("Switching to the " +tabId + " tab");
         multiWindowPage.switchToTab(tabId);
     }
 

@@ -44,14 +44,14 @@ public class NestedFramesPage extends PageObject {
 
     private void navigateToExpectedFrameLayer(String frameId) {
         if(!Objects.equals(frameId, "Bottom")) {
-            this.getDriver().switchTo().frame(frameTop)
+            this.getDriver().switchTo().frame(frameTop);
         }
         switchToFrame(frameId);
     }
 
     public String getFrameText(String frameId) {
         navigateToExpectedFrameLayer(frameId);
-        String frameText = this.frameText.toString();
+        String frameText = this.frameText.getText();
         if(!Objects.equals(frameId, "Bottom")){
             this.getDriver().switchTo().parentFrame().switchTo().parentFrame();
         } else {

@@ -1,7 +1,7 @@
 package pages;
 
+import net.serenitybdd.annotations.DefaultUrl;
 import net.serenitybdd.core.pages.WebElementFacade;
-import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.pages.PageObject;
 import org.apache.commons.lang3.SystemUtils;
 import org.openqa.selenium.By;

@@ -38,7 +38,7 @@ public class JSAlertPage extends PageObject {
     }
 
     public String getResultText() {
-        return lblResult.toString();
+        return lblResult.getText();
     }
 
     public void interactWithAlert(String interaction) {

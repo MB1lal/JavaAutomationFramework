@@ -26,12 +26,13 @@ public class MultiWindowPage extends PageObject {
                 break;
             case "previous":
                 this.getDriver().switchTo().window(windowHandle.get(0));
+                break;
             default:
                 throw new IllegalArgumentException("Invalid argument specified");
         }
     }
 
     public String getHeaderText() {
-        return lblH3.toString();
+        return lblH3.getText();
     }
 }

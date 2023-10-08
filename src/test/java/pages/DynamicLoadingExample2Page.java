@@ -27,6 +27,6 @@ public class DynamicLoadingExample2Page extends PageObject {
 
     public String getLoadedElementText() {
         waitForLoadingBarToFinish();
-        return txtHello.toString();
+        return txtHello.getText();
     }
 }

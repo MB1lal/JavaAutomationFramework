@@ -25,11 +25,11 @@ public class FileUploadPage extends PageObject {
     }
 
     public String getHeaderText() {
-        return lblHeader.toString();
+        return lblHeader.getText();
     }
 
     public String getUploadedFileName() {
-        return uploadedFiles.toString();
+        return uploadedFiles.getText();
     }
 
 }

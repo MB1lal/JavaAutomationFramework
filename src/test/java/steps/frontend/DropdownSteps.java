@@ -12,7 +12,7 @@ public class DropdownSteps extends BaseSteps {
 
     @When("I select option {} from the dropdown")
     public void selectDropdownOption(String option) {
-        logger.info("Selecting $option from dropdown");
+        logger.info("Selecting " + option + " from dropdown");
         dropdownPage.selectDropdownOption(option);
     }
 

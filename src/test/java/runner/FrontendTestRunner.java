@@ -8,11 +8,12 @@ import org.junit.runner.RunWith;
 @RunWith(CucumberWithSerenity.class)
 @CucumberOptions(
         features = {"src/test/resources/features/frontend"},
-        glue = {"frontend"},
-        tags = "@test and not @ignore",
-        stepNotifications = true,
+        glue = {"steps"},
+        tags = "@test and not @ignore and @herokuapp and not @download",
+        stepNotifications = false,
+        dryRun = false,
         plugin = {
-                "json:target/cucumber-report/cucumber.json"
+                "json:target/cucumber-report/frontend-cucumber.json"
         }
 )
 public class FrontendTestRunner {
