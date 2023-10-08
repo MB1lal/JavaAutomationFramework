@@ -2,10 +2,12 @@ package steps.base;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.javafaker.Faker;
+import com.google.gson.Gson;
 import connectors.PetConnector;
 import connectors.PetStoreConnector;
 import connectors.UserConnector;
 import core.EnvSerenity;
+import models.DownloadedJson;
 import models.pet.PetModel;
 import models.store.PetStoreModel;
 import models.users.UserModel;
@@ -17,6 +19,9 @@ import org.jeasy.random.EasyRandomParameters;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -46,6 +51,8 @@ public abstract class BaseSteps {
     public static final Logger logger = LogManager.getLogger(BaseSteps.class);
 
     public utils.ExcelReader excelReader = utils.ExcelReader.getInstance();
+
+    protected String downloadPath = System.getProperty("user.dir") + "/src/test-output/downloads/";
 
     public EasyRandom random = new EasyRandom(
             new EasyRandomParameters()
@@ -165,5 +172,39 @@ public abstract class BaseSteps {
     public void logoutUser() {
         userConnector.logoutUser();
     }
+
+    protected void deleteDownloadsFolder(String path) {
+        File folder = new File(path);
+        if (folder.exists()) {
+            if (folder.isDirectory()) {
+                // Delete all files and subdirectories in the folder
+                Arrays.stream(folder.listFiles()).forEach(file -> {
+                    if (file.isDirectory()) {
+                        deleteDownloadsFolder(file.getAbsolutePath());
+                    } else {
+                        file.delete();
+                    }
+                });
+            }
+            // Delete the empty folder
+            folder.delete();
+            logger.info("Folder deleted successfully.");
+        } else {
+            logger.info("Folder does not exist.");
+        }
+    }
+
+    protected String readJsonFile(String filePath) {
+        try {
+            return Arrays.toString(Files.readAllBytes(Paths.get(filePath)));
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    protected DownloadedJson parseJson(String jsonString) {
+        return new Gson().fromJson(jsonString, DownloadedJson.class);
+    }
+
 
 }
