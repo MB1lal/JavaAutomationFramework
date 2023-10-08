@@ -9,7 +9,7 @@ public class HerokuMainPageSteps extends BaseSteps {
 
     @Given("I am on the {} page")
     public void navigateToXPage(String pageName) {
-        logger.info("Navigating to $pageName");
+        logger.info("Navigating to " + pageName);
         herokuPage.navigateToPage(pageName);
     }
 }
