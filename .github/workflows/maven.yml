@@ -16,11 +16,12 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     container: mb1lal/java-docker-image:java17
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-      - name: Run tests in parallel
-        run: mvn clean -ntp -P useTheForks integration-test -Dserenity.batch.count-1 -Dserenity.batch.number-1 -Dfailsafe.rerunFailingTestsCount=0
+        - name: Checkout code
+          uses: actions/checkout@v4
+
+        - name: Run tests in parallel
+          run: mvn clean -ntp -P useTheForks integration-test -Dserenity.batch.count-1 -Dserenity.batch.number-1 -Dfailsafe.rerunFailingTestsCount=0
