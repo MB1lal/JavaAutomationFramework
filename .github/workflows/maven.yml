@@ -1,0 +1,25 @@
+# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
+
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Java CI with Maven
+
+on:
+  push:
+    branches: [ "Add-github-actions" ]
+  pull_request:
+    branches: [ "Add-github-actions" ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    container: mb1lal/java-docker-image:java17
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run tests in parallel
+        run: mvn clean -ntp -P useTheForks integration-test -Dserenity.batch.count-1 -Dserenity.batch.number-1 -Dfailsafe.rerunFailingTestsCount=0
