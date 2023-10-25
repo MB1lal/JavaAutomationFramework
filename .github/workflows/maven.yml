@@ -18,7 +18,7 @@ jobs:
         run: docker pull mb1lal/java-docker-image:java17
 
       - name: Start Docker container
-        run: docker run -it --rm mb1lal/java-docker-image:java17
+        run: docker run -dit mb1lal/java-docker-image:java17
 
       - name: Run tests inside container
         run: mvn test
