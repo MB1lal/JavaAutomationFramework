@@ -18,7 +18,7 @@ jobs:
         run: docker pull mb1lal/java-docker-image:java17
 
       - name: Start Docker container
-        run: docker run -t --entrypoint /bin/bash mb1lal/java-docker-image:java17
+        run: docker run -dt --entrypoint /bin/bash mb1lal/java-docker-image:java17
 
       - name: Run tests inside container
         run: mvn clean -ntp -P useTheForks integration-test -Dserenity.batch.count-1 -Dserenity.batch.number-1 -Dfailsafe.rerunFailingTestsCount=2
