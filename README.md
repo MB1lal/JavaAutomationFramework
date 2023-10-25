@@ -1,6 +1,7 @@
 # Java Automation Framework
-
 ![Framework Image](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgyR-wbRlT-kFKR9ydvuOZ7QOug6X8EDQSDA&usqp=CAU)
+
+[![Java CI with Maven](https://github.com/MB1lal/JavaAutomationFramework/actions/workflows/maven.yml/badge.svg?branch=master)](https://github.com/MB1lal/JavaAutomationFramework/actions/workflows/maven.yml)
 
 ## Overview
 
