@@ -15,7 +15,9 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Pull Docker image
-        run: docker pull mb1lal/java-docker-image:java17
+        run: |
+              java --version
+              docker pull mb1lal/java-docker-image:java17
 
       - name: Start Docker container
         run: docker run -dt --entrypoint /bin/bash mb1lal/java-docker-image:java17
