@@ -21,4 +21,4 @@ jobs:
         run: docker run -dit mb1lal/java-docker-image:java17
 
       - name: Run tests inside container
-        run: mvn test
+        run: mvn clean -ntp -P useTheForks integration-test -Dserenity.batch.count-1 -Dserenity.batch.number-1 -Dfailsafe.rerunFailingTestsCount=2
