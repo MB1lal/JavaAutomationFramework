@@ -11,9 +11,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
       - name: Pull Docker image
         run: |
               java --version
@@ -21,6 +18,9 @@ jobs:
 
       - name: Start Docker container
         run: docker run -dt --entrypoint /bin/bash mb1lal/java-docker-image:java17
+
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: Run tests inside container
         run: |
