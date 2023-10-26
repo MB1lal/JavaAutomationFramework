@@ -16,7 +16,7 @@ jobs:
 
       - name: Start Docker container
         run: |
-              docker run -t --entrypoint /bin/bash mb1lal/java-docker-image:java17
+              docker run --entrypoint /bin/bash mb1lal/java-docker-image:java17
               java --version
               ls
 
