@@ -14,17 +14,9 @@ jobs:
       - name: Pull Docker image
         run: docker pull mb1lal/java-docker-image:java17
 
-      - name: Start Docker container
-        run: |
-              docker run --entrypoint /bin/bash mb1lal/java-docker-image:java17
-              java --version
-              ls
-
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Run tests inside container
+      - name: Run tests inside Docker container
         run: |
-              java --version
-              ls
-              mvn clean -ntp -P useTheForks integration-test -Dserenity.batch.count-1 -Dserenity.batch.number-1 -Dfailsafe.rerunFailingTestsCount=2
+              docker run --entrypoint /bin/bash mb1lal/java-docker-image:java17 -c "java --version && ls && mvn clean -ntp -P useTheForks integration-test -Dserenity.batch.count-1 -Dserenity.batch.number-1 -Dfailsafe.rerunFailingTestsCount=2"
