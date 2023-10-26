@@ -15,7 +15,10 @@ jobs:
         run: docker pull mb1lal/java-docker-image:java17
 
       - name: Start Docker container
-        run: docker run -t --entrypoint /bin/bash mb1lal/java-docker-image:java17
+        run: |
+              docker run -t --entrypoint /bin/bash mb1lal/java-docker-image:java17
+              java --version
+              ls
 
       - name: Checkout code
         uses: actions/checkout@v4
