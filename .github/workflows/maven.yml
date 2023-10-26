@@ -19,4 +19,4 @@ jobs:
 
       - name: Run tests inside Docker container
         run: |
-            docker run --entrypoint /bin/bash -v ${{ github.workspace }}:/workspace mb1lal/java-docker-image:java17 -c "cd /workspace && mvn clean -ntp -P useTheForks integration-test -Dfailsafe.rerunFailingTestsCount=2 -Dwebdriver.driver=firefox"
+            docker run --entrypoint /bin/bash -v ${{ github.workspace }}:/workspace mb1lal/java-docker-image:java17 -c "cd /workspace && mvn clean -ntp -P useTheForks integration-test -Dfailsafe.rerunFailingTestsCount=2 "
