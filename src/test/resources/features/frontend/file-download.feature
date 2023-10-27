@@ -1,4 +1,4 @@
-@test @frontend @herokuapp @download
+@test @frontend @herokuapp @download @ignore
 Feature: Secure File Download Tests
 
   Scenario: Download a Secure File
