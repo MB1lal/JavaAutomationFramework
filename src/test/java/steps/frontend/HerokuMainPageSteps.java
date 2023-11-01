@@ -11,5 +11,6 @@ public class HerokuMainPageSteps extends BaseSteps {
     public void navigateToXPage(String pageName) {
         logger.info("Navigating to " + pageName);
         herokuPage.navigateToPage(pageName);
+        logger.debug("Browser: " + herokuPage.getDriver().toString());
     }
 }
