@@ -2,7 +2,7 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ "Add-github-actions" ]
+    branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
 
@@ -11,12 +11,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Pull Docker image
-        run: docker pull mb1lal/java-test:java17
-
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Run tests inside Docker container
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'adopt'
+          java-version: '17'
+
+      - name: Run tests
         run: |
-              docker run --entrypoint /bin/bash -v ${{ github.workspace }}:/workspace mb1lal/java-test:java17 -c "cd /workspace && mvn clean -ntp -P useTheForks integration-test -Dfailsafe.rerunFailingTestsCount=2"
+             mvn clean -ntp -P useTheForks integration-test -Dfailsafe.rerunFailingTestsCount=2"
+
+      - name: Generate report
+        run: |
+              mvn serenity:aggregate
