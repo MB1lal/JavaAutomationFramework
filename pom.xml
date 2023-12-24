@@ -11,7 +11,7 @@
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <serenity.version>4.0.12</serenity.version>
+        <serenity.version>4.0.30</serenity.version>
         <parallel.tests>4</parallel.tests>
     </properties>
 
@@ -140,6 +140,12 @@
             <version>2.10.1</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.30</version>
+        </dependency>
+
     </dependencies>
 
 </project>
