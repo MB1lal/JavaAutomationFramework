@@ -1,6 +1,6 @@
 version: 2.1
-orbs:
-  browser-tools: circleci/browser-tools@1.4.6
+#orbs:
+#  browser-tools: circleci/browser-tools@1.4.6
 
 jobs:
   test-and-report:
@@ -8,7 +8,6 @@ jobs:
       - image: mb1lal/java-test:java17
     steps:
       - checkout
-      - browser-tools/install-browser-tools
       - run:
           name: Test
           command: mvn clean -ntp -P useTheForks integration-test -Dserenity.batch.count-1 -Dserenity.batch.number-1 -Dfailsafe.rerunFailingTestsCount=2

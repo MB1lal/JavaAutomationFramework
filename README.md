@@ -5,6 +5,8 @@
 
 [![report deployment](https://github.com/MB1lal/JavaAutomationFramework/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/MB1lal/JavaAutomationFramework/actions/workflows/pages/pages-build-deployment)
 
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/MB1lal/JavaAutomationFramework/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/MB1lal/JavaAutomationFramework/tree/master)
+
 ## Overview
 
 The Java Automation Framework is a comprehensive automation solution crafted for testing User Interfaces (UI), Application Programming Interfaces (APIs), and Mobile Applications. Developed using the Java programming language, this framework incorporates well-known testing libraries and tools to ensure robust and efficient test automation.
