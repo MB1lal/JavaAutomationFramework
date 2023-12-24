@@ -36,10 +36,17 @@ jobs:
           if-no-files-found: error
           retention-days: 1
 
-#      - name: Clean up gh-pages branch (optional)
-#        run: |
-#              git checkout -f gh-pages
-#              git rm -rf .
+      - name: Create or checkout gh-pages branch
+        run: |
+            git fetch origin gh-pages || git checkout -b gh-pages
+            continue-on-error: true
+
+      - name: Clean up gh-pages branch
+        run: |
+            git rm -rf .
+            # Add more cleanup steps if needed
+            git commit -m "Clean up gh-pages branch"
+            git push origin gh-pages
 
   deploy:
     needs: test
