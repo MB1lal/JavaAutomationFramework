@@ -43,6 +43,7 @@ git clone https://github.com/MB1lal/JavaAutomationFramework.git
 ### Reporting
 
 The test reports are powered by serenity itself and are published via GitHub Actions to GitHub pages.
+
 URL: https://mb1lal.github.io/JavaAutomationFramework/
 
 
