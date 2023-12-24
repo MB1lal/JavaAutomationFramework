@@ -1,1 +1,1 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><testsuite errors="0" failures="0" name="Test user operations" skipped="0" tests="1" time="9.82" timestamp="2023-12-24 02:36:36"><testcase name="User can be successfully deleted"/></testsuite>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><testsuite errors="0" failures="0" name="Test user operations" skipped="0" tests="1" time="16.87" timestamp="2023-12-24 02:43:00"><testcase name="User can be successfully deleted"/></testsuite>
