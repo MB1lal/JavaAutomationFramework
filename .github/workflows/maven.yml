@@ -38,8 +38,8 @@ jobs:
 
       - name: Clean up gh-pages branch (optional)
         run: |
-          git checkout -f gh-pages
-          git rm -rf .
+              git checkout -f gh-pages
+              git rm -rf .
 
   deploy:
     needs: test
