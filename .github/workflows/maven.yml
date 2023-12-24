@@ -36,10 +36,10 @@ jobs:
           if-no-files-found: error
           retention-days: 1
 
-#      - name: Clean up gh-pages branch (optional)
-#        run: |
-#          git checkout -f gh-pages
-#          git rm -rf .
+      - name: Clean up gh-pages branch (optional)
+        run: |
+          git checkout -f gh-pages
+          git rm -rf .
 
   deploy:
     needs: test
@@ -51,3 +51,11 @@ jobs:
         with:
           name: serenity
           path: ./serenity
+
+      - name: Deploy report to Github Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v3.9.3
+        with:
+          PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PUBLISH_BRANCH: gh-pages
+          PUBLISH_DIR: serenity
