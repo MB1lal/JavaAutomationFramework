@@ -1,1 +1,1 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><testsuite errors="0" failures="0" name="Testing the pets api" skipped="0" tests="1" time="11.92" timestamp="2023-12-24 03:15:19"><testcase name="Verifying newly added pet can be deleted"/></testsuite>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><testsuite errors="0" failures="0" name="Testing the pets api" skipped="0" tests="1" time="10.91" timestamp="2023-12-24 06:10:50"><testcase name="Verifying newly added pet can be deleted"/></testsuite>

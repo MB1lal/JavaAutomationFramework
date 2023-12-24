@@ -62,7 +62,7 @@
 <link type="text/css" media="screen" href="css/screen.css" rel="Stylesheet"/>
 <!--CHART.JS-->
 <script src="chartjs/chart.js"></script>
-<script src="chartjs/chartjs-plugin-datalabels@2.0.0"></script>
+<script src="chartjs/chartjs-plugin-datalabels@2.0.0.min.js"></script>
 <script src="chartjs/patternomaly.min.js"></script>
 <script>
     // Register the plugin to all charts:
@@ -232,7 +232,7 @@
             <a href="#"><i class="bi bi-chat-text"></i> Features</a>
         </li>
     </ul>
-    <span class="date-and-time"><a href="build-info.html"><i class="bi bi-info-circle"></i></a> Report generated 24-12-2023 15:15</span>
+    <span class="date-and-time"><a href="build-info.html"><i class="bi bi-info-circle"></i></a> Report generated 24-12-2023 18:10</span>
     <br style="clear:left"/>
 </div>
 
@@ -392,7 +392,7 @@
                                             <div class="col-sm-12">
                                                 <h3>Scenarios</h3>
 
-                                                    <a name="95392439-1b1a-48d0-92a7-6b28c12bf6b2"></a>
+                                                    <a name="67eacb10-6db9-4283-a8bf-9dbe3e1a00d6"></a>
                                                     <p class="rule-tags inline-tag">
                                                     </p>
 
@@ -506,7 +506,7 @@
                         <i class="bi bi-stopwatch"></i> Total
                         Duration
                     </td>
-                    <td>17s</td>
+                    <td>27s</td>
                 </tr>
                 <tr scope="row">
                     <td>
@@ -516,7 +516,7 @@
                     <td>
                         <i class="bi bi-trophy"></i> Fastest Test
                     </td>
-                    <td>16s</td>
+                    <td>1s</td>
                 </tr>
                 <tr scope="row">
                     <td>
@@ -527,30 +527,30 @@
                         <i class="bi bi-skip-start"></i> Slowest
                         Test
                     </td>
-                    <td>17s</td>
+                    <td>18s</td>
                 </tr>
                 <tr scope="row">
                     <td>
                         <i class="bi bi-flag-fill"></i> Tests Started
                     </td>
-                    <td>Dec 24, 2023 15:15:18</td>
+                    <td>Dec 24, 2023 18:10:49</td>
                     <td>
                         <i class="bi bi-stopwatch"></i> Average
                         Execution Time
                     </td>
-                    <td>17s</td>
+                    <td>10s</td>
                 </tr>
                 <tr scope="row">
                     <td>
                         <i class="bi bi-stop-circle"></i> Tests
                         Finished
                     </td>
-                    <td>Dec 24, 2023 15:15:36</td>
+                    <td>Dec 24, 2023 18:11:17</td>
                     <td>
                         <i class="bi bi-stopwatch-fill"></i> Total
                         Execution Time
                     </td>
-                    <td>34s</td>
+                    <td>20s</td>
                 </tr>
                 </tbody>
             </table>
@@ -577,13 +577,13 @@
                                                                             <a href="#">Dynamic Loading Tests</a>
                                                                     </td>
                                                                     <td>
-                                                                                <a href="50566f8f118f92b67ba784277b9a837af3a3c61bde32671421f03720934b1ea8.html">Load Hidden Element</a>
+                                                                            <a href="50566f8f118f92b67ba784277b9a837af3a3c61bde32671421f03720934b1ea8.html">Load Hidden Element</a>
                                                                     </td>
                                                                     <td><span class='context-icon'><i class='bi bi-browser-chrome' title='Chrome'></i> <i class='bi bi-ubuntu' title='Linux'></i></span><span style="display:none">Chrome,linux</span>
                                                                     </td>
                                                                     <td>4</td>
-                                                                    <td>15:15:18</td>
-                                                                    <td>17s 743ms</td>
+                                                                    <td>18:10:49</td>
+                                                                    <td>18s 874ms</td>
                                                                     <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
                                                                     </td>
                                                                 </tr>
@@ -592,13 +592,13 @@
                                                                             <a href="#">Dynamic Loading Tests</a>
                                                                     </td>
                                                                     <td>
-                                                                                <a href="58e29f51f4e5210c1bbafbfc133db71b82bb3a8ecd8fdd22ecf2c8e15e8270c6.html">Load Newly Created Element</a>
+                                                                            <a href="58e29f51f4e5210c1bbafbfc133db71b82bb3a8ecd8fdd22ecf2c8e15e8270c6.html">Load Newly Created Element</a>
                                                                     </td>
                                                                     <td><span class='context-icon'><i class='bi bi-browser-chrome' title='Chrome'></i> <i class='bi bi-ubuntu' title='Linux'></i></span><span style="display:none">Chrome,linux</span>
                                                                     </td>
                                                                     <td>4</td>
-                                                                    <td>15:15:19</td>
-                                                                    <td>16s 753ms</td>
+                                                                    <td>18:11:15</td>
+                                                                    <td>1s 173ms</td>
                                                                     <td><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon ' title='SUCCESS'></i></a> <span style="display:none">SUCCESS</span>
                                                                     </td>
                                                                 </tr>
@@ -671,7 +671,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-12">
-                    <span class="version">Serenity BDD version 4.0.12</span>
+                    <span class="version">Serenity BDD version 4.0.30</span>
                 </div>
             </div>
         </div>
@@ -974,7 +974,7 @@
             datasets: [{
                 label: 'Number of tests per duration',
                 fill: false,
-                data: ['0','0','2','0','0','0','0','0'],
+                data: ['0','1','1','0','0','0','0','0'],
                 backgroundColor: 'rgba(83, 146, 255,0.5)',
                 borderColor: 'rgba(83, 146, 255, 1)',
             }]
