@@ -1,7 +1,9 @@
 # Java Automation Framework
 ![Framework Image](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgyR-wbRlT-kFKR9ydvuOZ7QOug6X8EDQSDA&usqp=CAU)
 
-[![Java CI with Maven](https://github.com/MB1lal/JavaAutomationFramework/actions/workflows/maven.yml/badge.svg?branch=master)](https://github.com/MB1lal/JavaAutomationFramework/actions/workflows/maven.yml)
+[![Java CI with Maven](https://github.com/MB1lal/JavaAutomationFramework/actions/workflows/maven.yml/badge.svg)](https://github.com/MB1lal/JavaAutomationFramework/actions/workflows/maven.yml)
+
+[![report deployment](https://github.com/MB1lal/JavaAutomationFramework/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/MB1lal/JavaAutomationFramework/actions/workflows/pages/pages-build-deployment)
 
 ## Overview
 
@@ -34,3 +36,11 @@ Clone this repository to your local machine using Git:
 
 ```bash
 git clone https://github.com/MB1lal/JavaAutomationFramework.git
+```
+
+### Reporting
+
+The test reports are powered by serenity itself and are published via GitHub Actions to GitHub pages.
+URL: https://mb1lal.github.io/JavaAutomationFramework/
+
+

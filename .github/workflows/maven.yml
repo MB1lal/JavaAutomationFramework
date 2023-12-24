@@ -21,12 +21,10 @@ jobs:
           java-version: '17'
 
       - name: Run tests
-        run: |
-             mvn clean -ntp -P useTheForks integration-test -Dfailsafe.rerunFailingTestsCount=2 -Dcucumber.filter.tags="@backend"  
+        run: mvn clean -ntp -P useTheForks integration-test -Dfailsafe.rerunFailingTestsCount=2
 
       - name: Generate report
-        run: |
-              mvn -ntp serenity:aggregate
+        run: mvn -ntp serenity:aggregate
 
       - name: Upload report artifacts
         uses: actions/upload-artifact@v4.0.0
@@ -34,17 +32,15 @@ jobs:
           name: serenity
           path: ./target/site/serenity
           if-no-files-found: error
-          retention-days: 1
+          retention-days: 10
 
       - name: Create or checkout gh-pages branch (optional)
         continue-on-error: true
-        run: |
-            git fetch origin gh-pages || git checkout -b gh-pages
+        run: git fetch origin gh-pages || git checkout -b gh-pages
 
       - name: Clean up gh-pages branch (optional)
         continue-on-error: true
-        run: |
-            git rm -rf .
+        run: git rm -rf .
 
   deploy:
     needs: test
