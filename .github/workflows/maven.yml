@@ -37,14 +37,13 @@ jobs:
           retention-days: 1
 
       - name: Create or checkout gh-pages branch
+        continue-on-error: true
         run: |
             git fetch origin gh-pages || git checkout -b gh-pages
-            continue-on-error: true
 
       - name: Clean up gh-pages branch
         run: |
             git rm -rf .
-            # Add more cleanup steps if needed
             git commit -m "Clean up gh-pages branch"
             git push origin gh-pages
 
