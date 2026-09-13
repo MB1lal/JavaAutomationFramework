@@ -14,11 +14,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up JDK 17
+      - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
-          distribution: 'adopt'
-          java-version: '17'
+          distribution: 'temurin'
+          java-version: '21'
 
       - name: Run tests
         run: mvn clean -ntp -P useTheForks integration-test -Dfailsafe.rerunFailingTestsCount=2

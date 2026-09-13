@@ -5,7 +5,7 @@ version: 2.1
 jobs:
   test-and-report:
     docker:
-      - image: mb1lal/java-test:java17
+      - image: mb1lal/java-test:java21
     steps:
       - checkout
       - run:

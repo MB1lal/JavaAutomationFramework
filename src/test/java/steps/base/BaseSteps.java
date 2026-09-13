@@ -1,7 +1,7 @@
 package steps.base;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.javafaker.Faker;
+import net.datafaker.Faker;
 import com.google.gson.Gson;
 import connectors.PetConnector;
 import connectors.PetStoreConnector;
@@ -74,7 +74,7 @@ public abstract class BaseSteps {
         Faker faker = new Faker();
 
         petStoreModel.setId(faker.random().nextInt(0,1000));
-        petStoreModel.setPetId(faker.hashCode());
+        petStoreModel.setPetId(faker.random().nextInt(0, Integer.MAX_VALUE));
         petStoreModel.setQuantity(4);
 
 
@@ -132,12 +132,12 @@ public abstract class BaseSteps {
     public UserModel createUserPayLoad() {
         UserModel userModel = new UserModel();
         Faker faker = new Faker();
-        userModel.setId(faker.hashCode());
-        userModel.setUsername(faker.name().username());
+        userModel.setId(faker.random().nextInt(0, Integer.MAX_VALUE));
+        userModel.setUsername(faker.internet().username());
         userModel.setFirstName(faker.name().firstName());
         userModel.setLastName(faker.name().lastName());
         userModel.setEmail(faker.internet().emailAddress());
-        userModel.setPassword(faker.internet().password());
+        userModel.setPassword(faker.internet().password(10, 20));
         userModel.setPhone(faker.phoneNumber().cellPhone());
         userModel.setUserStatus(faker.random().nextInt(3));
 
