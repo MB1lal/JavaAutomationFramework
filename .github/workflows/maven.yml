@@ -12,10 +12,10 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up JDK 21
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: 'temurin'
           java-version: '21'
@@ -27,7 +27,7 @@ jobs:
         run: mvn -ntp serenity:aggregate
 
       - name: Upload report artifacts
-        uses: actions/upload-artifact@v4.0.0
+        uses: actions/upload-artifact@v6
         with:
           name: serenity
           path: ./target/site/serenity
@@ -48,14 +48,14 @@ jobs:
 
     steps:
       - name: Download Build Artifact
-        uses: actions/download-artifact@v4.1.0
+        uses: actions/download-artifact@v7
         with:
           name: serenity
           path: ./serenity
 
       - name: Deploy report to Github Pages
         if: always()
-        uses: peaceiris/actions-gh-pages@v3.9.3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PUBLISH_BRANCH: gh-pages
