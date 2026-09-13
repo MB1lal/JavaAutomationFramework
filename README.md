@@ -27,7 +27,7 @@ The Java Automation Framework is a comprehensive automation solution crafted for
 
 Ensure you have the following prerequisites installed on your system:
 
-- JDK (Java Development Kit)
+- JDK 21 (Java Development Kit)
 - Maven (for project dependencies)
 - Appium (for mobile testing, if applicable)
 - WebDriver (for web UI testing, if applicable)

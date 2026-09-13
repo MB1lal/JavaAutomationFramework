@@ -9,11 +9,36 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-        <serenity.version>4.0.30</serenity.version>
+        <maven.compiler.release>21</maven.compiler.release>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <serenity.version>5.3.11</serenity.version>
+        <failsafe.version>3.5.2</failsafe.version>
+        <compiler-plugin.version>3.14.0</compiler-plugin.version>
+        <resources-plugin.version>3.3.1</resources-plugin.version>
+        <datafaker.version>2.7.0</datafaker.version>
+        <poi.version>5.4.1</poi.version>
+        <log4j.version>2.26.1</log4j.version>
+        <gson.version>2.14.0</gson.version>
+        <lombok.version>1.18.36</lombok.version>
+        <jackson.version>2.19.2</jackson.version>
+        <assertj.version>3.27.4</assertj.version>
+        <easy-random.version>5.0.0</easy-random.version>
         <parallel.tests>4</parallel.tests>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>net.serenity-bdd</groupId>
+                <artifactId>serenity-bom</artifactId>
+                <version>${serenity.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <profiles>
         <profile>
@@ -22,7 +47,7 @@
                 <plugins>
                     <plugin>
                         <artifactId>maven-failsafe-plugin</artifactId>
-                        <version>3.2.1</version>
+                        <version>${failsafe.version}</version>
                         <configuration>
                             <includes>
                                 <include>**/SlicedTestRunner*.java</include>
@@ -57,8 +82,17 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${compiler-plugin.version}</version>
+                <configuration>
+                    <release>21</release>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>3.2.1</version>
+                <version>${failsafe.version}</version>
                 <configuration>
                     <includes>
                         <include>**/SlicedTestRunner*.java</include>
@@ -80,14 +114,14 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
-                <version>3.3.1</version>
+                <version>${resources-plugin.version}</version>
             </plugin>
         </plugins>
     </build>
 
 
     <dependencies>
-        <!--  Serenity dependencies  -->
+        <!--  Serenity dependencies (versions aligned via serenity-bom) -->
         <dependency>
             <groupId>net.serenity-bdd</groupId>
             <artifactId>serenity-junit</artifactId>
@@ -103,47 +137,56 @@
             <artifactId>serenity-rest-assured</artifactId>
             <version>${serenity.version}</version>
         </dependency>
+        <dependency>
+            <groupId>net.serenity-bdd</groupId>
+            <artifactId>serenity-ensure</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.jeasy</groupId>
             <artifactId>easy-random-core</artifactId>
-            <version>5.0.0</version>
+            <version>${easy-random.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
-            <version>5.2.2</version>
+            <version>${poi.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${log4j.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
-            <version>2.17.2</version>
+            <version>${log4j.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.googlecode.json-simple</groupId>
-            <artifactId>json-simple</artifactId>
-            <version>1.1.1</version>
-        </dependency>
-        <dependency>
-            <groupId>com.github.javafaker</groupId>
-            <artifactId>javafaker</artifactId>
-            <version>1.0.2</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.jmdns</groupId>
-            <artifactId>jmdns</artifactId>
-            <version>3.4.1</version>
+            <groupId>net.datafaker</groupId>
+            <artifactId>datafaker</artifactId>
+            <version>${datafaker.version}</version>
         </dependency>
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
-            <version>2.10.1</version>
+            <version>${gson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertj.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.30</version>
+            <version>${lombok.version}</version>
         </dependency>
 
     </dependencies>
