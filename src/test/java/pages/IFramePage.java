@@ -26,15 +26,18 @@ public class IFramePage extends PageObject {
         // through the editor's own API. activeEditor exists before
         // initialisation finishes and anything set too early gets wiped, so
         // wait for initialised, then verify the write.
+        // The step captures a trailing space which TinyMCE serialises as
+        // &nbsp;, so trim first to keep exact-match assertions working.
+        String text = inputText == null ? "" : inputText.trim();
         this.getDriver().switchTo().defaultContent();
         JavascriptExecutor js = (JavascriptExecutor) this.getDriver();
         WebDriverWait wait = new WebDriverWait(this.getDriver(), Duration.ofSeconds(15));
         wait.until(d -> Boolean.TRUE.equals(js.executeScript(
                 "return typeof tinymce !== 'undefined' && !!tinymce.activeEditor"
                         + " && tinymce.activeEditor.initialized;")));
-        js.executeScript("tinymce.activeEditor.setContent(arguments[0]);", inputText);
+        js.executeScript("tinymce.activeEditor.setContent(arguments[0]);", text);
         wait.until(d -> String.valueOf(
-                js.executeScript("return tinymce.activeEditor.getContent();")).contains(inputText));
+                js.executeScript("return tinymce.activeEditor.getContent();")).contains(text));
     }
 
     public String getIFrameText() {
