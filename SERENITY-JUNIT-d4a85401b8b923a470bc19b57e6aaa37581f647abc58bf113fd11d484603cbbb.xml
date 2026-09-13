@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><testsuite errors="1" failures="0" name="File Upload Tests" skipped="0" tests="1" time="7.99" timestamp="2026-09-13 01:36:50"><testcase name="Upload a File"><error message="Cannot invoke &quot;net.serenitybdd.core.pages.WebElementFacade.click()&quot; because &quot;this.fileUploadPage&quot; is null" type="java.lang.NullPointerException">Cannot invoke "net.serenitybdd.core.pages.WebElementFacade.click()" because "this.fileUploadPage" is null</error><system-err>Cannot invoke "net.serenitybdd.core.pages.WebElementFacade.click()" because "this.fileUploadPage" is null
-pages.HerokuMainPage.navigateToPage(HerokuMainPage.java:63)
-steps.frontend.HerokuMainPageSteps.navigateToXPage(HerokuMainPageSteps.java:13)
-✽.I am on the file upload page(file:///home/runner/work/JavaAutomationFramework/JavaAutomationFramework/src/test/resources/features/frontend/file-upload.feature:5)
-</system-err></testcase></testsuite>
