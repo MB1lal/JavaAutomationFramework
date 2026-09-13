@@ -7,43 +7,75 @@
 
 [![CircleCI](https://dl.circleci.com/status-badge/img/gh/MB1lal/JavaAutomationFramework/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/MB1lal/JavaAutomationFramework/tree/master)
 
-## Overview
+## What this is
 
-The Java Automation Framework is a comprehensive automation solution crafted for testing User Interfaces (UI), Application Programming Interfaces (APIs), and Mobile Applications. Developed using the Java programming language, this framework incorporates well-known testing libraries and tools to ensure robust and efficient test automation.
+UI + API tests for a couple of public demo sites, written with Serenity BDD,
+Cucumber (JUnit4 runner) and RestAssured. The reports Serenity generates are
+published to GitHub Pages after every CI run.
 
-## Features
+Latest report: https://mb1lal.github.io/JavaAutomationFramework/
 
-- **Multi-Platform Support:** The framework accommodates testing on diverse platforms, including web applications, RESTful APIs, and mobile applications (Android and iOS).
-- **Modular Architecture:** It follows a modular and scalable architecture, facilitating the addition of new test cases and the maintenance of existing ones.
-- **Test Reporting:** Utilizes test reporting tools such as Serenity BDD to generate detailed and user-friendly test reports.
-- **Parallel Execution:** Supports parallel execution of tests for faster test suite execution.
-- **Cross-Browser Testing:** Enables cross-browser testing for web applications using WebDriver.
-- **API Testing:** Includes utilities for making API requests, validating responses, and performing API testing.
-- **Mobile Testing:** Provides support for mobile automation using Appium for Android and iOS.
+## What you need
 
-## Getting Started
+- Java 21 (the project targets release 21)
+- Maven 3.9+
+- Chrome — tests run headless by default, so no display needed
 
-### Prerequisites
+## Running the tests
 
-Ensure you have the following prerequisites installed on your system:
-
-- JDK 21 (Java Development Kit)
-- Maven (for project dependencies)
-- Appium (for mobile testing, if applicable)
-- WebDriver (for web UI testing, if applicable)
-
-### Clone the Repository
-
-Clone this repository to your local machine using Git:
+The suite runs through Maven Failsafe (`integration-test`), not Surefire,
+because the runners are `*TestRunner` / `SlicedTestRunner*` classes:
 
 ```bash
-git clone https://github.com/MB1lal/JavaAutomationFramework.git
+# everything, single fork setup
+mvn verify
+
+# parallel sliced run (this is what CI does)
+mvn -P useTheForks integration-test
 ```
 
-### Reporting
+A few knobs worth knowing:
 
-The test reports are powered by serenity itself and are published via GitHub Actions to GitHub pages.
+```bash
+# how many parallel forks (default 4)
+mvn -P useTheForks integration-test -Dparallel.tests=2
 
-URL: https://mb1lal.github.io/JavaAutomationFramework/
+# re-run failures once before giving up
+mvn -P useTheForks integration-test -Dfailsafe.rerunFailingTestsCount=2
+```
 
+Test config (base URLs, browser switches) lives in
+`src/test/resources/serenity.properties` and `serenity.conf`.
 
+## How it's laid out
+
+```
+src/test/java/
+  runner/        CucumberWithSerenity runners (all / frontend / backend / sliced)
+  steps/         glue code — backend/ for API, frontend/ for UI, base/ for shared bits
+  pages/         Serenity page objects for the-internet.herokuapp.com
+  connectors/    thin RestAssured wrappers around the Petstore API
+  models/        request/response POJOs
+  utils/         Excel read/write, random data, JSON helpers
+  core/          config + environment access
+src/test/resources/
+  features/      backend/ (pets, store, users) and frontend/ (herokuapp pages)
+  data-files/    static payloads, upload file, Excel test data
+```
+
+## What's covered
+
+- API — Petstore pets, store orders and users (create / read / update / delete flows)
+- UI — the-internet.herokuapp.com: login, checkboxes, dropdown, dynamic
+  loading, file upload, frames, JS alerts, hovers, multiple windows,
+  notifications
+
+## Notes
+
+- Test data is generated per run where it matters (DataFaker + EasyRandom),
+  so tests don't depend on leftover state in the demo APIs.
+- The file-download and IMDB/Google scenarios are tagged `@ignore` — the
+  former shells out to `wget` and the latter scrapes live Google results,
+  neither is reliable enough to keep in the suite. The TestNG sister project
+  (`JavaAutomationFramework-TestNG`) reimplements the download check properly
+  over plain HTTP and drops the Google scraping on purpose.
