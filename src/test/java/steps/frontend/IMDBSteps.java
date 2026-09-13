@@ -1,18 +1,17 @@
 package steps.frontend;
 
-import pages.IMDBPages;
+import static utils.SharedStateConstants.FRONTEND.CAST_AND_CREW;
+
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
-import net.serenitybdd.core.Serenity;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import steps.base.BaseSteps;
-import utils.ExcelWriter;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import static utils.SharedStateConstants.FRONTEND.CAST_AND_CREW;
+import net.serenitybdd.core.Serenity;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import pages.IMDBPages;
+import steps.base.BaseSteps;
+import utils.ExcelWriter;
 
 public class IMDBSteps extends BaseSteps {
 
@@ -41,8 +40,6 @@ public class IMDBSteps extends BaseSteps {
     @And("User exports all the data into {string} sheet")
     public void exportDataToExcel(String sheetName) throws IOException, InvalidFormatException {
         ExcelWriter excelWriter = ExcelWriter.getInstance();
-        excelWriter.writeToExcel(Serenity.sessionVariableCalled(CAST_AND_CREW),
-                "testData",
-                sheetName);
+        excelWriter.writeToExcel(Serenity.sessionVariableCalled(CAST_AND_CREW), "testData", sheetName);
     }
 }

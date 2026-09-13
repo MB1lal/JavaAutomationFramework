@@ -1,11 +1,11 @@
 package steps.frontend;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pages.DropdownPage;
 import steps.base.BaseSteps;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class DropdownSteps extends BaseSteps {
     private DropdownPage dropdownPage = new DropdownPage();

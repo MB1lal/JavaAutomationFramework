@@ -279,7 +279,7 @@ public class StringUtils {
         // Note: escaped[pos] = end of the escaped char array.
         int pos = 0;
 
-        for (int i = 0; i < chars.length;) {
+        for (int i = 0; i < chars.length; ) {
             if (chars[i] != '&') {
                 escaped[pos++] = chars[i++];
                 continue;
@@ -287,13 +287,11 @@ public class StringUtils {
 
             // Allow e.g. &#123;
             int j = i + 1;
-            if (j < chars.length && chars[j] == '#')
-                j++;
+            if (j < chars.length && chars[j] == '#') j++;
 
             // Scan until we find a char that is not letter or digit.
             for (; j < chars.length; j++) {
-                if (!Character.isLetterOrDigit(chars[j]))
-                    break;
+                if (!Character.isLetterOrDigit(chars[j])) break;
             }
 
             boolean replaced = false;
@@ -303,8 +301,7 @@ public class StringUtils {
                         long charcode = 0;
                         char ch = s.charAt(i + 2);
                         if (ch == 'x' || ch == 'X') {
-                            charcode = Long.parseLong(new String(chars, i + 3, j - i - 3),
-                                    16);
+                            charcode = Long.parseLong(new String(chars, i + 3, j - i - 3), 16);
                         } else if (Character.isDigit(ch)) {
                             charcode = Long.parseLong(new String(chars, i + 2, j - i - 2));
                         }
@@ -324,7 +321,7 @@ public class StringUtils {
                         replaced = true;
                     }
                 }
-                j++;                            // Skip over ';'
+                j++; // Skip over ';'
             }
 
             if (!replaced) {

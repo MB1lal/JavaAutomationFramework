@@ -11,8 +11,7 @@ import models.users.UserModel;
  */
 public final class ScenarioContext {
 
-    private static final ThreadLocal<ScenarioContext> CURRENT =
-            ThreadLocal.withInitial(ScenarioContext::new);
+    private static final ThreadLocal<ScenarioContext> CURRENT = ThreadLocal.withInitial(ScenarioContext::new);
 
     private long petId;
     private String petStatus;
@@ -24,8 +23,7 @@ public final class ScenarioContext {
     private UserModel currentUser;
     private Response userResponse;
 
-    private ScenarioContext() {
-    }
+    private ScenarioContext() {}
 
     public static ScenarioContext current() {
         return CURRENT.get();

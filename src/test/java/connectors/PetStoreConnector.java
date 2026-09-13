@@ -9,43 +9,28 @@ import net.serenitybdd.rest.SerenityRest;
 public class PetStoreConnector {
 
     private RequestSpecification baseRequest() {
-        return SerenityRest
-                .with()
-                .contentType(ContentType.JSON)
-                .baseUri(TestConfig.petStoreUri());
+        return SerenityRest.with().contentType(ContentType.JSON).baseUri(TestConfig.petStoreUri());
     }
 
     public void placingAnOrder(String body) {
-        baseRequest()
-                .body(body)
-                .post("/order")
-                .then()
-                .statusCode(200);
+        baseRequest().body(body).post("/order").then().statusCode(200);
     }
 
     public Response fetchOrder(int orderId) {
         return baseRequest()
-                  .get("/order/" + orderId)
-                .then()
-                .assertThat()
-                .statusCode(200)
-                .extract().response();
-    }
-
-    public void fetchInvalidOrder(int orderId) {
-         baseRequest()
                 .get("/order/" + orderId)
                 .then()
                 .assertThat()
-                .statusCode(404);
+                .statusCode(200)
+                .extract()
+                .response();
+    }
+
+    public void fetchInvalidOrder(int orderId) {
+        baseRequest().get("/order/" + orderId).then().assertThat().statusCode(404);
     }
 
     public void deleteOrderById(int orderId) {
-         baseRequest()
-                .delete("/order/" + orderId)
-                .then()
-                .assertThat()
-                 .statusCode(200);
+        baseRequest().delete("/order/" + orderId).then().assertThat().statusCode(200);
     }
-
 }

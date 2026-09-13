@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class Tag {
-    public int id;
-    public String name;
+    private long id;
+    private String name;
 }

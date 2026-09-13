@@ -1,16 +1,15 @@
 package models.pet;
 
+import java.util.ArrayList;
 import lombok.Data;
 import utils.ToJson;
 
-import java.util.ArrayList;
-
 @Data
 public class PetModel implements ToJson {
-    public long id;
-    public Category category;
-    public String name;
-    public ArrayList<String> photoUrls;
-    public ArrayList<Tag> tags;
-    public String status;
+    private long id;
+    private Category category;
+    private String name;
+    private ArrayList<String> photoUrls;
+    private ArrayList<Tag> tags;
+    private String status;
 }

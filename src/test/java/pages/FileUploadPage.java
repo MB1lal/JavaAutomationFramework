@@ -1,13 +1,12 @@
 package pages;
 
+import java.time.Duration;
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 
 public class FileUploadPage extends PageObject {
     @FindBy(id = "file-upload")
@@ -21,6 +20,7 @@ public class FileUploadPage extends PageObject {
 
     @FindBy(id = "uploaded-files")
     private WebElementFacade uploadedFiles;
+
     public void selectFileToUpload() {
         btnFileUploader.sendKeys(System.getProperty("user.dir") + "/src/test/resources/data-files/UploadFile.txt");
     }
@@ -40,5 +40,4 @@ public class FileUploadPage extends PageObject {
     public String getUploadedFileName() {
         return uploadedFiles.getText();
     }
-
 }

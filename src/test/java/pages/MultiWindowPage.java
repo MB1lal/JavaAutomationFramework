@@ -1,10 +1,9 @@
 package pages;
 
+import java.util.List;
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
-
-import java.util.List;
 
 public class MultiWindowPage extends PageObject {
     @FindBy(css = "div[class='example'] a")
@@ -13,8 +12,7 @@ public class MultiWindowPage extends PageObject {
     @FindBy(css = "h3")
     private WebElementFacade lblH3;
 
-
-    public void openClickHereLink()  {
+    public void openClickHereLink() {
         linkClickHere.click();
     }
 
@@ -22,7 +20,7 @@ public class MultiWindowPage extends PageObject {
         List<String> windowHandle = this.getDriver().getWindowHandles().stream().toList();
         switch (tabId.toLowerCase()) {
             case "newly opened":
-                this.getDriver().switchTo().window(windowHandle.get(windowHandle.size()-1));
+                this.getDriver().switchTo().window(windowHandle.get(windowHandle.size() - 1));
                 break;
             case "previous":
                 this.getDriver().switchTo().window(windowHandle.get(0));

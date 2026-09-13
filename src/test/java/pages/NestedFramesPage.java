@@ -1,10 +1,9 @@
 package pages;
 
+import java.util.Objects;
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
-
-import java.util.Objects;
 
 public class NestedFramesPage extends PageObject {
     @FindBy(name = "frame-top")
@@ -43,7 +42,7 @@ public class NestedFramesPage extends PageObject {
     }
 
     private void navigateToExpectedFrameLayer(String frameId) {
-        if(!Objects.equals(frameId, "Bottom")) {
+        if (!Objects.equals(frameId, "Bottom")) {
             this.getDriver().switchTo().frame(frameTop);
         }
         switchToFrame(frameId);
@@ -52,7 +51,7 @@ public class NestedFramesPage extends PageObject {
     public String getFrameText(String frameId) {
         navigateToExpectedFrameLayer(frameId);
         String frameText = this.frameText.getText();
-        if(!Objects.equals(frameId, "Bottom")){
+        if (!Objects.equals(frameId, "Bottom")) {
             this.getDriver().switchTo().parentFrame().switchTo().parentFrame();
         } else {
             this.getDriver().switchTo().parentFrame();

@@ -16,8 +16,10 @@ public class NotificationsPage extends PageObject {
     }
 
     public String getNotificationText() {
-        return flashNotification.waitUntilVisible().getText().replace("\u00D7", "").trim();
+        return flashNotification
+                .waitUntilVisible()
+                .getText()
+                .replace("\u00D7", "")
+                .trim();
     }
-
-
 }

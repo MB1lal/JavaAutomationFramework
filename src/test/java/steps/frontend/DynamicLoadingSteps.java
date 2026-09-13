@@ -1,5 +1,7 @@
 package steps.frontend;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -7,8 +9,6 @@ import pages.DynamicLoadingExample1Page;
 import pages.DynamicLoadingExample2Page;
 import pages.DynamicLoadingPage;
 import steps.base.BaseSteps;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class DynamicLoadingSteps extends BaseSteps {
 
@@ -18,10 +18,9 @@ public class DynamicLoadingSteps extends BaseSteps {
 
     private int exampleNumber = 0;
 
-
     @When("I click the {} link")
     public void navigateToExample(String example) {
-        if(!example.contains("Example 1") && !example.contains("Example 2")) {
+        if (!example.contains("Example 1") && !example.contains("Example 2")) {
             logger.error("Invalid example specified");
             throw new IllegalArgumentException();
         }
@@ -33,7 +32,7 @@ public class DynamicLoadingSteps extends BaseSteps {
     @And("I click the \"Start\" button")
     public void clickStart() {
         logger.info("Clicking start button");
-        switch(exampleNumber) {
+        switch (exampleNumber) {
             case 1:
                 dynamicLoadingExample1.clickStart();
                 break;
@@ -46,12 +45,16 @@ public class DynamicLoadingSteps extends BaseSteps {
     @Then("I should see the loaded element on the page")
     public void verifyElementIsLoaded() {
         String validationText = "Hello World!";
-        switch(exampleNumber) {
+        switch (exampleNumber) {
             case 1:
-                assertThat(dynamicLoadingExample1.getLoadedElementText()).as("Incorrect text").isEqualTo(validationText);
+                assertThat(dynamicLoadingExample1.getLoadedElementText())
+                        .as("Incorrect text")
+                        .isEqualTo(validationText);
                 break;
             case 2:
-                assertThat(dynamicLoadingExample2.getLoadedElementText()).as("Incorrect text").isEqualTo(validationText);
+                assertThat(dynamicLoadingExample2.getLoadedElementText())
+                        .as("Incorrect text")
+                        .isEqualTo(validationText);
                 break;
         }
     }

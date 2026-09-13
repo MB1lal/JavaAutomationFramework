@@ -5,7 +5,6 @@ import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 import org.openqa.selenium.Alert;
 
-
 public class JSAlertPage extends PageObject {
     @FindBy(css = "button[onclick='jsAlert()']")
     private WebElementFacade btnJSAlert;
@@ -51,7 +50,7 @@ public class JSAlertPage extends PageObject {
                 alert.dismiss();
                 break;
             default:
-                throw new  IllegalArgumentException("Invalid interaction specified");
+                throw new IllegalArgumentException("Invalid interaction specified");
         }
     }
 

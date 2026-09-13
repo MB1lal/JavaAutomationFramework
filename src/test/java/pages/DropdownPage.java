@@ -2,10 +2,8 @@ package pages;
 
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.Select;
 
 public class DropdownPage extends PageObject {
 
@@ -27,5 +25,4 @@ public class DropdownPage extends PageObject {
         initialiseDropdown();
         return dropdown.getFirstSelectedOption().getText();
     }
-
 }
