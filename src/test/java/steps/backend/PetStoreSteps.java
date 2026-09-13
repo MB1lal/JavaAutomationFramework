@@ -1,18 +1,16 @@
 package steps.backend;
 
-import models.store.PetStoreModel;
+import static org.assertj.core.api.Assertions.assertThat;
+
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.response.Response;
+import models.store.PetStoreModel;
 import steps.base.BaseSteps;
 
-
-import static org.assertj.core.api.Assertions.assertThat;
-
 public class PetStoreSteps extends BaseSteps {
-
 
     @Given("I place an order on the pet store")
     public void placingOrderOnPetStore() {
@@ -45,6 +43,4 @@ public class PetStoreSteps extends BaseSteps {
     public void assertOrderDoesNotExist() {
         fetchDeletedOrder(context().getOrderId());
     }
-
-
 }

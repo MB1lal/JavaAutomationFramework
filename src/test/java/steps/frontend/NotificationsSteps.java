@@ -1,12 +1,12 @@
 package steps.frontend;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import java.util.List;
 import pages.NotificationsPage;
 import steps.base.BaseSteps;
-
-import java.util.List;
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class NotificationsSteps extends BaseSteps {
     private NotificationsPage notificationsPage = new NotificationsPage();

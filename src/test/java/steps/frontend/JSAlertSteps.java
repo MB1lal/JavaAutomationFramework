@@ -1,11 +1,11 @@
 package steps.frontend;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
 import pages.JSAlertPage;
 import steps.base.BaseSteps;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class JSAlertSteps extends BaseSteps {
     private JSAlertPage jsAlertPage = new JSAlertPage();
@@ -31,8 +31,6 @@ public class JSAlertSteps extends BaseSteps {
     @And("Result says {}")
     public void verifyResultText(String expectedText) {
         logger.info("Verifying result text");
-        assertThat(jsAlertPage.getResultText())
-                .as("Incorrect result text")
-                .isEqualTo(expectedText);
+        assertThat(jsAlertPage.getResultText()).as("Incorrect result text").isEqualTo(expectedText);
     }
 }

@@ -1,5 +1,7 @@
 package pages;
 
+import java.time.Duration;
+import java.util.List;
 import net.serenitybdd.annotations.DefaultUrl;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.pages.PageObject;
@@ -11,9 +13,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WindowType;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import java.time.Duration;
-import java.util.List;
-
 
 @DefaultUrl("page:googleURL")
 public class GooglePages extends PageObject {
@@ -29,7 +28,6 @@ public class GooglePages extends PageObject {
 
     String url;
     private final WebDriver driver = super.getDriver();
-
 
     public void pageHasLogo() {
         pageLogo.withTimeoutOf(Duration.ofSeconds(3));
@@ -56,13 +54,13 @@ public class GooglePages extends PageObject {
         url = partialLinkText.getAttribute("baseURI");
     }
 
-    //Deprecated
-//    public void openInANewTab() {
-//        Actions actions = new Actions(driver);
-//        actions.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ENTER).build().perform();
-//        ArrayList<String> tab = new ArrayList<>(driver.getWindowHandles());
-//        driver.switchTo().window(tab.get(1));
-//    }
+    // Deprecated
+    //    public void openInANewTab() {
+    //        Actions actions = new Actions(driver);
+    //        actions.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.ENTER).build().perform();
+    //        ArrayList<String> tab = new ArrayList<>(driver.getWindowHandles());
+    //        driver.switchTo().window(tab.get(1));
+    //    }
 
     public void openInANewTab() {
         WebDriver newTab = driver.switchTo().newWindow(WindowType.TAB);
@@ -72,10 +70,9 @@ public class GooglePages extends PageObject {
     public void openLinkInANewTab(String linkText) {
         WebElement partialLinkText = driver.findElement(By.partialLinkText(linkText));
         String keys;
-        if(SystemUtils.OS_NAME.contains("Mac")) {
+        if (SystemUtils.OS_NAME.contains("Mac")) {
             keys = Keys.chord(Keys.COMMAND, Keys.ENTER);
-        }
-        else {
+        } else {
             keys = Keys.chord(Keys.CONTROL, Keys.ENTER);
         }
 

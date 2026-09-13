@@ -1,15 +1,15 @@
 package steps.backend;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import connectors.UserConnector;
-import models.users.UserModel;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.response.Response;
+import models.users.UserModel;
 import steps.base.BaseSteps;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class UsersSteps extends BaseSteps {
 
@@ -38,7 +38,9 @@ public class UsersSteps extends BaseSteps {
 
     @Then("I delete the user")
     public void i_delete_user() {
-        context().setUserResponse(userConnector.deleteUser(context().getCurrentUser().getUsername()));
+        context()
+                .setUserResponse(
+                        userConnector.deleteUser(context().getCurrentUser().getUsername()));
     }
 
     @And("User is successfully deleted")
@@ -46,5 +48,4 @@ public class UsersSteps extends BaseSteps {
         Response response = context().getUserResponse();
         assertThat(response.statusCode()).isEqualTo(200);
     }
-
 }

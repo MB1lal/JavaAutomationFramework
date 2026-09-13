@@ -6,12 +6,12 @@ import utils.ToJson;
 @Data
 public class UserModel implements ToJson {
 
-    Integer id;
-    String username;
-    String firstName;
-    String lastName;
-    String email;
-    String password;
-    String phone;
-    Integer userStatus;
+    private Integer id;
+    private String username;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String password;
+    private String phone;
+    private Integer userStatus;
 }

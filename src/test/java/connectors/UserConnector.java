@@ -9,10 +9,7 @@ import net.serenitybdd.rest.SerenityRest;
 public class UserConnector {
 
     private RequestSpecification baseRequest() {
-        return SerenityRest
-                .with()
-                .contentType(ContentType.JSON)
-                .baseUri(TestConfig.userUri());
+        return SerenityRest.with().contentType(ContentType.JSON).baseUri(TestConfig.userUri());
     }
 
     public Response getUser(String username) {
@@ -20,7 +17,8 @@ public class UserConnector {
                 .get("/" + username)
                 .then()
                 .statusCode(200)
-                .extract().response();
+                .extract()
+                .response();
     }
 
     public Response loginExistingUser(String username, String password) {
@@ -30,26 +28,19 @@ public class UserConnector {
                 .get("/login")
                 .then()
                 .statusCode(200)
-                .extract().response();
+                .extract()
+                .response();
     }
 
     public void logoutUser() {
-        baseRequest()
-                .get("/logout")
-                .then()
-                .statusCode(200);
+        baseRequest().get("/logout").then().statusCode(200);
     }
 
     public void createNewUser(String user) {
-        baseRequest()
-                .body(user)
-                .post()
-                .then()
-                .statusCode(200);
+        baseRequest().body(user).post().then().statusCode(200);
     }
 
     public Response deleteUser(String username) {
-        return baseRequest()
-                .delete("/" + username);
+        return baseRequest().delete("/" + username);
     }
 }

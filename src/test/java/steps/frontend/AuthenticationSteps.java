@@ -1,5 +1,7 @@
 package steps.frontend;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -8,14 +10,12 @@ import pages.AuthenticationPage;
 import pages.HerokuMainPage;
 import steps.base.BaseSteps;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 public class AuthenticationSteps extends BaseSteps {
     AuthenticationPage authenticationPage = new AuthenticationPage();
     HerokuMainPage herokuMainPage = new HerokuMainPage();
 
     @When("I enter username {} and password {}")
-    public void enterUserPass(String username,String password) {
+    public void enterUserPass(String username, String password) {
         logger.info("Entering username and password");
         authenticationPage.enterUsernameAndPassword(username, password);
     }
@@ -31,7 +31,7 @@ public class AuthenticationSteps extends BaseSteps {
         assertThat(authenticationPage.userIsLoggedIn())
                 .as("User is not logged in.")
                 .isTrue();
-                logger.info("Logged in successfully");
+        logger.info("Logged in successfully");
     }
 
     @Then("I should see an error message {}")
@@ -43,7 +43,7 @@ public class AuthenticationSteps extends BaseSteps {
     @Given("I am logged in on the form authentication page")
     public void userIsAlreadyLoggedIn() {
         herokuMainPage.navigateToPage("form authentication");
-        enterUserPass("tomsmith","SuperSecretPassword!");
+        enterUserPass("tomsmith", "SuperSecretPassword!");
         loginIsClicked();
     }
 

@@ -1,6 +1,7 @@
 package steps.backend;
 
-import models.pet.PetModel;
+import static org.assertj.core.api.Assertions.assertThat;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import io.cucumber.java.en.And;
@@ -8,12 +9,10 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.response.Response;
-import steps.base.BaseSteps;
-
 import java.io.IOException;
 import java.util.Collections;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import models.pet.PetModel;
+import steps.base.BaseSteps;
 
 public class PetsSteps extends BaseSteps {
 
@@ -85,8 +84,7 @@ public class PetsSteps extends BaseSteps {
     }
 
     @And("I update the pet {} to {}")
-    public void updatingPetDetails(String attribute,String attributeValue) {
+    public void updatingPetDetails(String attribute, String attributeValue) {
         updatePetDetails(attribute, attributeValue);
     }
-
 }

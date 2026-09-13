@@ -1,11 +1,11 @@
 package steps.frontend;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import pages.FileUploadPage;
 import steps.base.BaseSteps;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class FileUploadSteps extends BaseSteps {
     FileUploadPage fileUploadPage = new FileUploadPage();
@@ -21,6 +21,8 @@ public class FileUploadSteps extends BaseSteps {
     public void verifyFileIsDownloaded() {
         logger.info("Verifying file is successfully uploaded");
         assertThat(fileUploadPage.getHeaderText()).as("File not uploaded").isEqualTo("File Uploaded!");
-        assertThat(fileUploadPage.getUploadedFileName()).as("Incorrect file uploaded").contains("UploadFile.txt");
+        assertThat(fileUploadPage.getUploadedFileName())
+                .as("Incorrect file uploaded")
+                .contains("UploadFile.txt");
     }
 }

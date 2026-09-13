@@ -5,7 +5,6 @@ import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 
-
 @DefaultUrl("page:herokuURL")
 public class HerokuMainPage extends PageObject {
     @FindBy(linkText = "Form Authentication")
@@ -43,7 +42,7 @@ public class HerokuMainPage extends PageObject {
 
     public void navigateToPage(String pageName) {
         this.open();
-        switch(pageName.toLowerCase()) {
+        switch (pageName.toLowerCase()) {
             case "form authentication":
                 formAuthentication.click();
                 break;

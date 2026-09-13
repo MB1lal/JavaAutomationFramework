@@ -1,5 +1,7 @@
 package steps.frontend;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -7,8 +9,6 @@ import pages.FramesPage;
 import pages.IFramePage;
 import pages.NestedFramesPage;
 import steps.base.BaseSteps;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class FramesSteps extends BaseSteps {
     FramesPage framesPage = new FramesPage();

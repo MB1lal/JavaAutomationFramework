@@ -13,8 +13,7 @@ public final class TestConfig {
 
     private static volatile EnvironmentVariables environmentVariables;
 
-    private TestConfig() {
-    }
+    private TestConfig() {}
 
     private static EnvironmentVariables environment() {
         if (environmentVariables == null) {

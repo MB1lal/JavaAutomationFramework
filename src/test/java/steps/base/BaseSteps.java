@@ -1,31 +1,25 @@
 package steps.base;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import net.datafaker.Faker;
-import com.google.gson.Gson;
 import connectors.PetConnector;
 import connectors.PetStoreConnector;
 import connectors.UserConnector;
 import core.ScenarioContext;
 import core.TestConfig;
-import models.DownloadedJson;
-import models.pet.PetModel;
-import models.store.PetStoreModel;
-import models.users.UserModel;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.jeasy.random.EasyRandom;
-import org.jeasy.random.EasyRandomParameters;
-
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
-
+import models.pet.PetModel;
+import models.store.PetStoreModel;
+import models.users.UserModel;
+import net.datafaker.Faker;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.jeasy.random.EasyRandom;
+import org.jeasy.random.EasyRandomParameters;
 
 public abstract class BaseSteps {
 
@@ -41,10 +35,10 @@ public abstract class BaseSteps {
     protected String downloadPath = System.getProperty("user.dir") + "/src/test-output/downloads/";
 
     // EasyRandom instances are not shared between parallel scenarios.
-    private static final ThreadLocal<EasyRandom> RANDOM = ThreadLocal.withInitial(() -> new EasyRandom(
-            new EasyRandomParameters()
+    private static final ThreadLocal<EasyRandom> RANDOM =
+            ThreadLocal.withInitial(() -> new EasyRandom(new EasyRandomParameters()
                     .seed(new Random().nextLong())
-                    //sensible string length
+                    // sensible string length
                     .stringLengthRange(5, 50)));
 
     protected static ScenarioContext context() {
@@ -63,19 +57,18 @@ public abstract class BaseSteps {
     public PetModel createNewPetPayload() {
         return RANDOM.get().nextObject(PetModel.class);
     }
+
     public PetModel createPetPayloadUsingFile() throws IOException {
-        return getStaticBody(
-            PetModel.class, TestConfig.petFileBodiesRoot() + "new-pet.json");
+        return getStaticBody(PetModel.class, TestConfig.petFileBodiesRoot() + "new-pet.json");
     }
 
     public PetStoreModel createPetStorePayload() {
         PetStoreModel petStoreModel = new PetStoreModel();
         Faker faker = new Faker();
 
-        petStoreModel.setId(faker.random().nextInt(0,1000));
+        petStoreModel.setId(faker.random().nextInt(0, 1000));
         petStoreModel.setPetId(faker.random().nextInt(0, Integer.MAX_VALUE));
         petStoreModel.setQuantity(4);
-
 
         return petStoreModel;
     }
@@ -92,13 +85,11 @@ public abstract class BaseSteps {
     }
 
     public void getPetById(long petId) {
-        context().setPetResponse(
-            petConnector.getPetById((int) petId));
+        context().setPetResponse(petConnector.getPetById((int) petId));
     }
 
     public void getPetStatus(List<String> status) {
-        context().setPetResponse(
-                petConnector.getPetStatus(status));
+        context().setPetResponse(petConnector.getPetStatus(status));
     }
 
     public void deletePetWithId(long petId) {
@@ -107,7 +98,6 @@ public abstract class BaseSteps {
 
     public void updatePetDetails(String attribute, String attributeValue) {
         petConnector.updatePetDetails(context().getPetId(), attribute, attributeValue);
-
     }
 
     public void placePetStoreOrder(PetStoreModel petStoreModel) {
@@ -116,8 +106,7 @@ public abstract class BaseSteps {
     }
 
     public void fetchPetStoreOrderDetails(int orderId) {
-        context().setOrderResponse(
-                petStoreConnector.fetchOrder(orderId));
+        context().setOrderResponse(petStoreConnector.fetchOrder(orderId));
     }
 
     public void fetchDeletedOrder(int orderId) {
@@ -140,26 +129,20 @@ public abstract class BaseSteps {
         userModel.setPhone(faker.phoneNumber().cellPhone());
         userModel.setUserStatus(faker.random().nextInt(3));
 
-
         context().setCurrentUser(userModel);
-
 
         return userModel;
     }
 
     public void verifyUserExists() {
-        context().setUserResponse(
-            userConnector.getUser(context().getCurrentUser().getUsername()));
+        context()
+                .setUserResponse(
+                        userConnector.getUser(context().getCurrentUser().getUsername()));
     }
 
     public void loginUser() {
         UserModel user = context().getCurrentUser();
-        context().setUserResponse(
-                userConnector.loginExistingUser(
-                        user.getUsername(),
-                        user.getPassword()
-                )
-        );
+        context().setUserResponse(userConnector.loginExistingUser(user.getUsername(), user.getPassword()));
     }
 
     public void logoutUser() {
@@ -186,18 +169,4 @@ public abstract class BaseSteps {
             logger.info("Folder does not exist.");
         }
     }
-
-    protected String readJsonFile(String filePath) {
-        try {
-            return Arrays.toString(Files.readAllBytes(Paths.get(filePath)));
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
-    protected DownloadedJson parseJson(String jsonString) {
-        return new Gson().fromJson(jsonString, DownloadedJson.class);
-    }
-
-
 }

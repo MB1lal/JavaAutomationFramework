@@ -18,10 +18,9 @@ public class HoversPage extends PageObject {
 
     private final By profileName = By.cssSelector("h5");
 
-
     public void hoverOverAvatar(int userId) {
         Actions actions = new Actions(this.getDriver());
-        switch(userId) {
+        switch (userId) {
             case 1:
                 actions.moveToElement(firstUser).perform();
                 break;
@@ -37,5 +36,4 @@ public class HoversPage extends PageObject {
     public String getProfileName(int userId) {
         return this.getDriver().findElements(profileName).get(userId).getText();
     }
-
 }

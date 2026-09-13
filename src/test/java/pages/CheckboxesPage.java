@@ -13,19 +13,19 @@ public class CheckboxesPage extends PageObject {
     private WebElementFacade checkbox2;
 
     public void clickCheckbox(int index) {
-        if(index == 1) {
+        if (index == 1) {
             checkbox1.click();
         }
-        if(index == 2) {
+        if (index == 2) {
             checkbox2.click();
         }
     }
 
     public Boolean isChecked(int index) {
-        if(index == 1) {
+        if (index == 1) {
             return checkbox1.isSelected();
         }
-        if(index == 2) {
+        if (index == 2) {
             return checkbox2.isSelected();
         }
         return false;

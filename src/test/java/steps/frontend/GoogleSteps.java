@@ -1,16 +1,16 @@
 package steps.frontend;
 
-import pages.GooglePages;
-import pages.IMDBPages;
+import static utils.SharedStateConstants.FRONTEND.EXCEL_DATA;
+import static utils.SharedStateConstants.FRONTEND.LINK_TEXT;
+
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import net.serenitybdd.core.Serenity;
-import steps.base.BaseSteps;
-
 import java.util.List;
-import static utils.SharedStateConstants.FRONTEND.EXCEL_DATA;
-import static utils.SharedStateConstants.FRONTEND.LINK_TEXT;
+import net.serenitybdd.core.Serenity;
+import pages.GooglePages;
+import pages.IMDBPages;
+import steps.base.BaseSteps;
 
 public class GoogleSteps extends BaseSteps {
 
@@ -50,7 +50,7 @@ public class GoogleSteps extends BaseSteps {
     @And("User right clicks on the link")
     public void rightClickOnThelink() {
         String linkText = Serenity.sessionVariableCalled(LINK_TEXT);
-//        googlePages.rightClickOnThelink(linkText);
+        //        googlePages.rightClickOnThelink(linkText);
         googlePages.saveTheLinkedURL(linkText);
     }
 
@@ -60,8 +60,4 @@ public class GoogleSteps extends BaseSteps {
         googlePages.openLinkInANewTab(linkText);
         iMDBPages.pageHasLogo();
     }
-
-
-
-
 }
