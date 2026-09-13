@@ -10,39 +10,39 @@
 ## What this is
 
 UI + API tests for a couple of public demo sites, written with Serenity BDD,
-Cucumber (JUnit4 runner) and RestAssured. The reports Serenity generates are
-published to GitHub Pages after every CI run.
+Cucumber on the JUnit Platform, and RestAssured. The reports Serenity
+generates are published to GitHub Pages after every CI run.
 
 Latest report: https://mb1lal.github.io/JavaAutomationFramework/
 
 ## What you need
 
-- Java 21 (the project targets release 21)
-- Maven 3.9+
+- Java 21+ (enforced by the build)
+- Maven 3.9+ (enforced by the build)
 - Chrome — tests run headless by default, so no display needed
 
 ## Running the tests
 
-The suite runs through Maven Failsafe (`integration-test`), not Surefire,
-because the runners are `*TestRunner` / `SlicedTestRunner*` classes:
+The suite runs through Maven Failsafe (`integration-test`), not Surefire.
+`mvn verify` also aggregates the Serenity report at the end:
 
 ```bash
-# everything, single fork setup
+# everything
 mvn verify
 
-# parallel sliced run (this is what CI does)
-mvn -P useTheForks integration-test
+# just the API or UI runners
+mvn verify -Dtest=BackendTestRunner
+mvn verify -Dtest=FrontendTestRunner
+
+# re-run failures twice before giving up (this is what CI does)
+mvn verify -Dfailsafe.rerunFailingTestsCount=2
 ```
 
-A few knobs worth knowing:
-
-```bash
-# how many parallel forks (default 4)
-mvn -P useTheForks integration-test -Dparallel.tests=2
-
-# re-run failures once before giving up
-mvn -P useTheForks integration-test -Dfailsafe.rerunFailingTestsCount=2
-```
+Scenarios run in parallel (4 threads, configured in
+`src/test/resources/junit-platform.properties`), each with a fresh browser
+and its own generated test data, so they can't trip over each other. The
+build also checks code formatting (`spotless:check`) — run
+`mvn spotless:apply` if it complains.
 
 Test config (base URLs, browser switches) lives in
 `src/test/resources/serenity.properties` and `serenity.conf`.
@@ -51,16 +51,17 @@ Test config (base URLs, browser switches) lives in
 
 ```
 src/test/java/
-  runner/        CucumberWithSerenity runners (all / frontend / backend / sliced)
+  runner/        JUnit Platform @Suite runners (all / frontend / backend)
   steps/         glue code — backend/ for API, frontend/ for UI, base/ for shared bits
   pages/         Serenity page objects for the-internet.herokuapp.com
   connectors/    thin RestAssured wrappers around the Petstore API
   models/        request/response POJOs
   utils/         Excel read/write, random data, JSON helpers
-  core/          config + environment access
+  core/          TestConfig (lazy config) + ScenarioContext (typed per-scenario state)
 src/test/resources/
   features/      backend/ (pets, store, users) and frontend/ (herokuapp pages)
   data-files/    static payloads, upload file, Excel test data
+  junit-platform.properties   Cucumber engine parallelism settings
 ```
 
 ## What's covered
@@ -72,10 +73,11 @@ src/test/resources/
 
 ## Notes
 
-- Test data is generated per run where it matters (DataFaker + EasyRandom),
-  so tests don't depend on leftover state in the demo APIs.
-- The file-download and IMDB/Google scenarios are tagged `@ignore` — the
-  former shells out to `wget` and the latter scrapes live Google results,
-  neither is reliable enough to keep in the suite. The TestNG sister project
-  (`JavaAutomationFramework-TestNG`) reimplements the download check properly
-  over plain HTTP and drops the Google scraping on purpose.
+- Test data is generated fresh per scenario (unique pet/order IDs, random
+  users via DataFaker), so parallel runs don't depend on leftover state in
+  the demo APIs.
+- The IMDB/Google scenarios are tagged `@ignore` — they scrape live Google
+  results, which isn't reliable enough to keep in the suite. The TestNG
+  sister project (`JavaAutomationFramework-TestNG`) drops that scraping on
+  purpose. File download, on the other hand, was reimplemented over plain
+  HTTP and runs as part of the suite.
