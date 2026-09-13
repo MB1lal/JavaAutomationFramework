@@ -5,6 +5,7 @@ import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import net.serenitybdd.core.Serenity;
 import net.serenitybdd.cucumber.suiteslicing.SerenityTags;
+import core.ScenarioContext;
 
 import static utils.SharedStateConstants.FRONTEND.EXCEL_DATA;
 
@@ -31,6 +32,11 @@ public class Hooks extends BaseSteps{
         // Warm it up before any step runs so the first scenario of the fork
         // doesn't construct pages against a driver that doesn't exist yet.
         Serenity.getDriver().get("about:blank");
+    }
+
+    @Before(order = 1)
+    public void resetScenarioState() {
+        ScenarioContext.reset();
     }
 
     @Before

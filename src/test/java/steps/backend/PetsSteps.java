@@ -8,66 +8,62 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.response.Response;
-import net.serenitybdd.core.Serenity;
 import steps.base.BaseSteps;
 
 import java.io.IOException;
+import java.util.Collections;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static utils.SharedStateConstants.BACKEND.PET.PET_RESPONSE;
-import static utils.SharedStateConstants.BACKEND.PET.PET_STATUS;
-import static utils.SharedStateConstants.BACKEND.PET_ID;
 
 public class PetsSteps extends BaseSteps {
 
-    @Given("I add the pet with {} = {}")
-    public void addAPet(String param, String paramValue) throws IOException {
+    @Given("I add a new pet with status = {}")
+    public void addANewPet(String status) throws IOException {
         PetModel petModel = createPetPayloadUsingFile();
-        switch(param.toLowerCase()) {
-            case "id" -> {
-                petModel.setId(Long.parseLong(paramValue));
-            }
-            case "status" -> {
-                petModel.setStatus(paramValue);
-            }
-        }
+        petModel.setId(uniquePetId());
+        petModel.setStatus(status);
         addANewPet(petModel);
     }
 
-    @And("The pet with id = {int} {}")
-    public void assertingPetWithId(int petId, String result) {
-        Response response = Serenity.sessionVariableCalled(PET_RESPONSE);
-        switch (result) {
-            case "exists" -> {
-                assertThat(response.statusCode())
-                        .withFailMessage("The pet with id = " + petId + " doesn't exists")
-                        .isEqualTo(200);
-                PetModel petResponse = response.as(PetModel.class);
-                assertThat(petResponse.getId())
-                        .withFailMessage("No pet with petId = " + petId + " exists.")
-                        .isEqualTo(petId);
-            }
-            case "doesn't exists" -> assertThat(response.statusCode())
-                    .withFailMessage("The pet with id = " + petId + " still exists")
-                    .isEqualTo(404);
-        }
-
+    @When("I fetch the pet by id")
+    public void fetchPetById() {
+        getPetById(context().getPetId());
     }
 
-    @When("I call the pet api with {}")
-    public void callingApiWithId(String callingParameter) {
-        switch (callingParameter.toLowerCase()) {
-            case "id" -> getPetById(Serenity.sessionVariableCalled(PET_ID));
-            case "status" -> getPetStatus(java.util.Collections.singletonList(Serenity.sessionVariableCalled(PET_STATUS)));
-        }
+    @When("I fetch pets by status")
+    public void fetchPetsByStatus() {
+        getPetStatus(Collections.singletonList(context().getPetStatus()));
+    }
+
+    @When("I delete the pet")
+    public void deleteThePet() {
+        deletePetWithId(context().getPetId());
+    }
+
+    @Then("the pet exists")
+    public void petExists() {
+        Response response = context().getPetResponse();
+        assertThat(response.statusCode())
+                .withFailMessage("The pet doesn't exist")
+                .isEqualTo(200);
+        assertThat(response.as(PetModel.class).getId())
+                .withFailMessage("No pet with the expected id exists.")
+                .isEqualTo(context().getPetId());
+    }
+
+    @Then("the pet does not exist")
+    public void petDoesNotExist() {
+        assertThat(context().getPetResponse().statusCode())
+                .withFailMessage("The pet still exists")
+                .isEqualTo(404);
     }
 
     @Then("The pet has status = {}")
     public void assertingPetWithStatus(String status) throws JsonProcessingException {
-        Response response = Serenity.sessionVariableCalled(PET_RESPONSE);
-        long petId = Serenity.sessionVariableCalled(PET_ID);
-        // Read status via tree model: the shared demo API contains records
-        // with values outside Java int range, which breaks full POJO mapping.
+        Response response = context().getPetResponse();
+        long petId = context().getPetId();
+        // Tree model, not POJO mapping: the shared demo API contains records
+        // with values outside Java int range.
         String body = response.getBody().asString().trim();
         String actualStatus = null;
         if (body.startsWith("{")) {
@@ -86,11 +82,6 @@ public class PetsSteps extends BaseSteps {
         assertThat(actualStatus)
                 .withFailMessage("No pet with status = " + status + " exists.")
                 .isEqualTo(status);
-    }
-
-    @When("I call the pet deletion api with id = {int}")
-    public void deletingThePetWithId(long id) {
-        deletePetWithId(id);
     }
 
     @And("I update the pet {} to {}")

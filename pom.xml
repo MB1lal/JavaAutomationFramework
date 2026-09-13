@@ -76,9 +76,10 @@
                 <version>${failsafe.version}</version>
                 <configuration>
                     <includes>
-                        <include>**/*TestRunner.java</include>
+                        <include>**/allTestRunner.java</include>
                     </includes>
-                    <!-- Sequential by default; parallelism is opt-in (see junit-platform.properties) -->
+                    <!-- One fork; scenarios spread across threads by the
+                         Cucumber engine (see junit-platform.properties) -->
                     <forkCount>1</forkCount>
                     <reuseForks>true</reuseForks>
                 </configuration>

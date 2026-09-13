@@ -7,12 +7,9 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.response.Response;
-import net.serenitybdd.core.Serenity;
 import steps.base.BaseSteps;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static utils.SharedStateConstants.BACKEND.USERS.USERNAME;
-import static utils.SharedStateConstants.BACKEND.USERS.USER_RESPONSE;
 
 public class UsersSteps extends BaseSteps {
 
@@ -41,12 +38,12 @@ public class UsersSteps extends BaseSteps {
 
     @Then("I delete the user")
     public void i_delete_user() {
-        Serenity.setSessionVariable(USER_RESPONSE).to(userConnector.deleteUser(Serenity.sessionVariableCalled(USERNAME)));
+        context().setUserResponse(userConnector.deleteUser(context().getCurrentUser().getUsername()));
     }
 
     @And("User is successfully deleted")
     public void user_is_successfully_deleted() {
-        Response response = Serenity.sessionVariableCalled(USER_RESPONSE);
+        Response response = context().getUserResponse();
         assertThat(response.statusCode()).isEqualTo(200);
     }
 

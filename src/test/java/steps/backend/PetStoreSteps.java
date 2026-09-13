@@ -6,47 +6,44 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.response.Response;
-import net.serenitybdd.core.Serenity;
 import steps.base.BaseSteps;
 
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static utils.SharedStateConstants.BACKEND.PET_STORE.PET_ORDER_ID;
-import static utils.SharedStateConstants.BACKEND.PET_STORE.PET_STORE_RESPONSE;
 
 public class PetStoreSteps extends BaseSteps {
 
 
-    @Given("I place an order on pet store with id = {int}")
-    public void placingOrderOnPetStore(int orderId) {
+    @Given("I place an order on the pet store")
+    public void placingOrderOnPetStore() {
         PetStoreModel petStoreModel = createPetStorePayload();
-        petStoreModel.setId(orderId);
+        petStoreModel.setId(uniqueOrderId());
         placePetStoreOrder(petStoreModel);
     }
 
-    @When("I fetch the order using id = {int}")
-    public void petStoreOrderStatusIsCalled(int orderId) {
-        fetchPetStoreOrderDetails(orderId);
+    @When("I fetch the order")
+    public void fetchTheOrder() {
+        fetchPetStoreOrderDetails(context().getOrderId());
     }
 
     @Then("The order is successfully placed")
     public void assertingOrderIsSuccessfullyPlaced() {
-        Response response = Serenity.sessionVariableCalled(PET_STORE_RESPONSE);
+        Response response = context().getOrderResponse();
         PetStoreModel petStoreModel = response.as(PetStoreModel.class);
 
         assertThat(petStoreModel.getId())
                 .withFailMessage("The order Id is not found.")
-                .isEqualTo(Serenity.sessionVariableCalled(PET_ORDER_ID));
+                .isEqualTo(context().getOrderId());
     }
 
-    @When("I delete the order by id = {int}")
-    public void deleteByOrderId(int orderId) {
-        deleteOrderById(orderId);
+    @When("I delete the order")
+    public void deleteTheOrder() {
+        deleteOrderById(context().getOrderId());
     }
 
-    @And("The order with id = {int} shouldn't exist")
-    public void assertOrderDoesNotExist(int orderId) {
-        fetchDeletedOrder(orderId);
+    @And("The order shouldn't exist")
+    public void assertOrderDoesNotExist() {
+        fetchDeletedOrder(context().getOrderId());
     }
 
 
