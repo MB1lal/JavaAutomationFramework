@@ -1,6 +1,6 @@
 package connectors;
 
-import core.EnvSerenity;
+import core.TestConfig;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -12,7 +12,7 @@ public class PetStoreConnector {
         return SerenityRest
                 .with()
                 .contentType(ContentType.JSON)
-                .baseUri(EnvSerenity.basePetStoreURI);
+                .baseUri(TestConfig.petStoreUri());
     }
 
     public void placingAnOrder(String body) {

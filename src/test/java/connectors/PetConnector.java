@@ -1,15 +1,12 @@
 package connectors;
 
-import core.EnvSerenity;
+import core.TestConfig;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import net.serenitybdd.core.Serenity;
 import net.serenitybdd.rest.SerenityRest;
 import java.util.List;
 
-
-import static utils.SharedStateConstants.BACKEND.PET_ID;
 
 public class PetConnector {
 
@@ -17,7 +14,7 @@ public class PetConnector {
         return SerenityRest
                 .with()
                 .contentType(ContentType.JSON)
-                .baseUri(EnvSerenity.basePetURI);
+                .baseUri(TestConfig.petUri());
     }
 
     public void addNewPet(String body) {
@@ -51,11 +48,11 @@ public class PetConnector {
                 .extract().response();
     }
 
-    public void updatePetDetails(String attribute, String attributeValue) {
+    public void updatePetDetails(long petId, String attribute, String attributeValue) {
         baseRequest()
                 .header("Content-Type", ContentType.URLENC)
                 .formParam(attribute, attributeValue)
-                .post("/" + Serenity.sessionVariableCalled(PET_ID))
+                .post("/" + petId)
                 .then()
                 .statusCode(200)
                 .extract().response();

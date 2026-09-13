@@ -6,12 +6,12 @@ import com.google.gson.Gson;
 import connectors.PetConnector;
 import connectors.PetStoreConnector;
 import connectors.UserConnector;
-import core.EnvSerenity;
+import core.ScenarioContext;
+import core.TestConfig;
 import models.DownloadedJson;
 import models.pet.PetModel;
 import models.store.PetStoreModel;
 import models.users.UserModel;
-import net.serenitybdd.core.Serenity;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jeasy.random.EasyRandom;
@@ -24,21 +24,7 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-
-import static utils.SharedStateConstants.BACKEND.PET.PET_RESPONSE;
-import static utils.SharedStateConstants.BACKEND.PET.PET_STATUS;
-import static utils.SharedStateConstants.BACKEND.PET_ID;
-import static utils.SharedStateConstants.BACKEND.PET_STORE.PET_ORDER_ID;
-import static utils.SharedStateConstants.BACKEND.PET_STORE.PET_STORE_RESPONSE;
-import static utils.SharedStateConstants.BACKEND.USERS.EMAIL;
-import static utils.SharedStateConstants.BACKEND.USERS.FIRST_NAME;
-import static utils.SharedStateConstants.BACKEND.USERS.LAST_NAME;
-import static utils.SharedStateConstants.BACKEND.USERS.PASSWORD;
-import static utils.SharedStateConstants.BACKEND.USERS.PHONE;
-import static utils.SharedStateConstants.BACKEND.USERS.STATUS;
-import static utils.SharedStateConstants.BACKEND.USERS.USERNAME;
-import static utils.SharedStateConstants.BACKEND.USERS.USER_ID;
-import static utils.SharedStateConstants.BACKEND.USERS.USER_RESPONSE;
+import java.util.concurrent.ThreadLocalRandom;
 
 
 public abstract class BaseSteps {
@@ -54,19 +40,32 @@ public abstract class BaseSteps {
 
     protected String downloadPath = System.getProperty("user.dir") + "/src/test-output/downloads/";
 
-    public EasyRandom random = new EasyRandom(
+    // EasyRandom instances are not shared between parallel scenarios.
+    private static final ThreadLocal<EasyRandom> RANDOM = ThreadLocal.withInitial(() -> new EasyRandom(
             new EasyRandomParameters()
                     .seed(new Random().nextLong())
-            //sensible string length
-                    .stringLengthRange(5,50)
-    );
+                    //sensible string length
+                    .stringLengthRange(5, 50)));
+
+    protected static ScenarioContext context() {
+        return ScenarioContext.current();
+    }
+
+    /** Unique id per call, so parallel scenarios never share test data. */
+    protected static long uniquePetId() {
+        return ThreadLocalRandom.current().nextLong(100_000L, 9_999_999L);
+    }
+
+    protected static int uniqueOrderId() {
+        return ThreadLocalRandom.current().nextInt(10_000, 999_999);
+    }
 
     public PetModel createNewPetPayload() {
-        return random.nextObject(PetModel.class);
+        return RANDOM.get().nextObject(PetModel.class);
     }
     public PetModel createPetPayloadUsingFile() throws IOException {
         return getStaticBody(
-            PetModel.class, EnvSerenity.petFileBodiesRoot + "new-pet.json");
+            PetModel.class, TestConfig.petFileBodiesRoot() + "new-pet.json");
     }
 
     public PetStoreModel createPetStorePayload() {
@@ -87,18 +86,18 @@ public abstract class BaseSteps {
 
     public void addANewPet(PetModel petModel) {
 
-        Serenity.setSessionVariable(PET_ID).to(petModel.getId());
-        Serenity.setSessionVariable(PET_STATUS).to(petModel.getStatus());
+        context().setPetId(petModel.getId());
+        context().setPetStatus(petModel.getStatus());
         petConnector.addNewPet(petModel.toJson());
     }
 
     public void getPetById(long petId) {
-        Serenity.setSessionVariable(PET_RESPONSE).to(
+        context().setPetResponse(
             petConnector.getPetById((int) petId));
     }
 
     public void getPetStatus(List<String> status) {
-        Serenity.setSessionVariable(PET_RESPONSE).to(
+        context().setPetResponse(
                 petConnector.getPetStatus(status));
     }
 
@@ -107,18 +106,18 @@ public abstract class BaseSteps {
     }
 
     public void updatePetDetails(String attribute, String attributeValue) {
-        petConnector.updatePetDetails(attribute, attributeValue);
+        petConnector.updatePetDetails(context().getPetId(), attribute, attributeValue);
 
     }
 
     public void placePetStoreOrder(PetStoreModel petStoreModel) {
-        Serenity.setSessionVariable(PET_ORDER_ID).to(petStoreModel.getId());
+        context().setOrderId(petStoreModel.getId());
         petStoreConnector.placingAnOrder(petStoreModel.toJson());
     }
 
     public void fetchPetStoreOrderDetails(int orderId) {
-        Serenity.setSessionVariable(PET_STORE_RESPONSE).
-                to(petStoreConnector.fetchOrder(orderId));
+        context().setOrderResponse(
+                petStoreConnector.fetchOrder(orderId));
     }
 
     public void fetchDeletedOrder(int orderId) {
@@ -133,38 +132,32 @@ public abstract class BaseSteps {
         UserModel userModel = new UserModel();
         Faker faker = new Faker();
         userModel.setId(faker.random().nextInt(0, Integer.MAX_VALUE));
-        userModel.setUsername(faker.internet().username());
+        userModel.setUsername(faker.credentials().username());
         userModel.setFirstName(faker.name().firstName());
         userModel.setLastName(faker.name().lastName());
         userModel.setEmail(faker.internet().emailAddress());
-        userModel.setPassword(faker.internet().password(10, 20));
+        userModel.setPassword(faker.credentials().password(10, 20));
         userModel.setPhone(faker.phoneNumber().cellPhone());
         userModel.setUserStatus(faker.random().nextInt(3));
 
 
-        Serenity.setSessionVariable(USERNAME).to(userModel.getUsername());
-        Serenity.setSessionVariable(PASSWORD).to(userModel.getPassword());
-        Serenity.setSessionVariable(EMAIL).to(userModel.getEmail());
-        Serenity.setSessionVariable(PHONE).to(userModel.getPhone());
-        Serenity.setSessionVariable(FIRST_NAME).to(userModel.getFirstName());
-        Serenity.setSessionVariable(LAST_NAME).to(userModel.getLastName());
-        Serenity.setSessionVariable(STATUS).to(userModel.getUserStatus());
-        Serenity.setSessionVariable(USER_ID).to(userModel.getId());
+        context().setCurrentUser(userModel);
 
 
         return userModel;
     }
 
     public void verifyUserExists() {
-        Serenity.setSessionVariable(USER_RESPONSE).to(
-            userConnector.getUser(Serenity.sessionVariableCalled(USERNAME)));
+        context().setUserResponse(
+            userConnector.getUser(context().getCurrentUser().getUsername()));
     }
 
     public void loginUser() {
-        Serenity.setSessionVariable(USER_RESPONSE).to(
+        UserModel user = context().getCurrentUser();
+        context().setUserResponse(
                 userConnector.loginExistingUser(
-                        Serenity.sessionVariableCalled(USERNAME),
-                        Serenity.sessionVariableCalled(PASSWORD)
+                        user.getUsername(),
+                        user.getPassword()
                 )
         );
     }
