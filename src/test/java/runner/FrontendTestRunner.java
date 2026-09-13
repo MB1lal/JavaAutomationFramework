@@ -1,20 +1,21 @@
 package runner;
 
+import org.junit.platform.suite.api.ConfigurationParameter;
+import org.junit.platform.suite.api.ConfigurationParameters;
+import org.junit.platform.suite.api.IncludeEngines;
+import org.junit.platform.suite.api.SelectClasspathResource;
+import org.junit.platform.suite.api.Suite;
 
-import io.cucumber.junit.CucumberOptions;
-import net.serenitybdd.cucumber.CucumberWithSerenity;
-import org.junit.runner.RunWith;
+import static io.cucumber.junit.platform.engine.Constants.FILTER_TAGS_PROPERTY_NAME;
+import static io.cucumber.junit.platform.engine.Constants.GLUE_PROPERTY_NAME;
 
-@RunWith(CucumberWithSerenity.class)
-@CucumberOptions(
-        features = {"src/test/resources/features/frontend"},
-        glue = {"steps"},
-        tags = "@test and not @ignore and @herokuapp and not @download",
-        stepNotifications = false,
-        dryRun = false,
-        plugin = {
-                "json:target/cucumber-report/frontend-cucumber.json"
-        }
-)
+@Suite
+@IncludeEngines("cucumber")
+@SelectClasspathResource("features/frontend")
+@ConfigurationParameters({
+        @ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "steps"),
+        @ConfigurationParameter(key = FILTER_TAGS_PROPERTY_NAME,
+                value = "@test and not @ignore and @herokuapp and not @download")
+})
 public class FrontendTestRunner {
 }

@@ -1,19 +1,20 @@
 package runner;
 
+import org.junit.platform.suite.api.ConfigurationParameter;
+import org.junit.platform.suite.api.ConfigurationParameters;
+import org.junit.platform.suite.api.IncludeEngines;
+import org.junit.platform.suite.api.SelectClasspathResource;
+import org.junit.platform.suite.api.Suite;
 
-import io.cucumber.junit.CucumberOptions;
-import net.serenitybdd.cucumber.CucumberWithSerenity;
-import org.junit.runner.RunWith;
+import static io.cucumber.junit.platform.engine.Constants.FILTER_TAGS_PROPERTY_NAME;
+import static io.cucumber.junit.platform.engine.Constants.GLUE_PROPERTY_NAME;
 
-@RunWith(CucumberWithSerenity.class)
-@CucumberOptions(
-        features = {"src/test/resources/features/backend"},
-        glue = {"steps"},
-        tags = "@test and @backend and not @ignore",
-        stepNotifications = false,
-        plugin = {
-                "json:target/cucumber-report/backend-cucumber.json"
-        }
-)
+@Suite
+@IncludeEngines("cucumber")
+@SelectClasspathResource("features/backend")
+@ConfigurationParameters({
+        @ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "steps"),
+        @ConfigurationParameter(key = FILTER_TAGS_PROPERTY_NAME, value = "@test and @backend and not @ignore")
+})
 public class BackendTestRunner {
 }

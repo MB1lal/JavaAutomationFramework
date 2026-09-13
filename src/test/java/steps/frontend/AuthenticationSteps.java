@@ -4,17 +4,15 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import net.serenitybdd.annotations.Steps;
 import pages.AuthenticationPage;
+import pages.HerokuMainPage;
 import steps.base.BaseSteps;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class AuthenticationSteps extends BaseSteps {
     AuthenticationPage authenticationPage = new AuthenticationPage();
-
-    @Steps
-    HerokuMainPageSteps herokuMainPageSteps;
+    HerokuMainPage herokuMainPage = new HerokuMainPage();
 
     @When("I enter username {} and password {}")
     public void enterUserPass(String username,String password) {
@@ -44,7 +42,7 @@ public class AuthenticationSteps extends BaseSteps {
 
     @Given("I am logged in on the form authentication page")
     public void userIsAlreadyLoggedIn() {
-        herokuMainPageSteps.navigateToXPage("form authentication");
+        herokuMainPage.navigateToPage("form authentication");
         enterUserPass("tomsmith","SuperSecretPassword!");
         loginIsClicked();
     }
