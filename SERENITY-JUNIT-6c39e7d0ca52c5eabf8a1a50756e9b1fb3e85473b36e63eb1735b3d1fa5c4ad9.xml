@@ -1,1 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><testsuite errors="0" failures="0" name="Multiple Windows Tests" skipped="0" tests="1" time="11.4" timestamp="2023-12-26 09:19:54"><testcase name="Open and Switch Between Windows"/></testsuite>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><testsuite errors="1" failures="0" name="Multiple Windows Tests" skipped="0" tests="1" time="6.94" timestamp="2026-09-13 12:38:58"><testcase name="Open and Switch Between Windows"><error message="Cannot invoke &quot;net.serenitybdd.core.pages.WebElementFacade.click()&quot; because &quot;this.multiWindowPage&quot; is null" type="java.lang.NullPointerException">Cannot invoke "net.serenitybdd.core.pages.WebElementFacade.click()" because "this.multiWindowPage" is null</error><system-err>Cannot invoke "net.serenitybdd.core.pages.WebElementFacade.click()" because "this.multiWindowPage" is null
+pages.HerokuMainPage.navigateToPage(HerokuMainPage.java:75)
+steps.frontend.HerokuMainPageSteps.navigateToXPage(HerokuMainPageSteps.java:13)
+✽.I am on the multiple windows page(file:///home/runner/work/JavaAutomationFramework/JavaAutomationFramework/src/test/resources/features/frontend/multi-window.feature:5)
+</system-err></testcase></testsuite>

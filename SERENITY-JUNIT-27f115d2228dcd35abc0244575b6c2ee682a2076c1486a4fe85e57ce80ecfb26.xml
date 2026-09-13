@@ -1,1 +1,1 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><testsuite errors="0" failures="0" name="Testing the pets store" skipped="0" tests="1" time="16.0" timestamp="2023-12-26 09:19:54"><testcase name="Order can be successfully deleted"/></testsuite>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><testsuite errors="0" failures="0" name="Testing the pets store" skipped="0" tests="1" time="21.63" timestamp="2026-09-13 12:38:23"><testcase name="Order can be successfully deleted"/></testsuite>

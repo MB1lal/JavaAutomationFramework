@@ -1,1 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><testsuite errors="0" failures="0" name="JavaScript Alerts Tests" skipped="0" tests="1" time="7.82" timestamp="2023-12-26 09:19:56"><testcase name="Verify working of JS prompt"/></testsuite>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><testsuite errors="1" failures="0" name="JavaScript Alerts Tests" skipped="0" tests="1" time="6.19" timestamp="2026-09-13 12:38:58"><testcase name="Verify working of JS prompt"><error message="Cannot invoke &quot;net.serenitybdd.core.pages.WebElementFacade.click()&quot; because &quot;this.jsAlertsPage&quot; is null" type="java.lang.NullPointerException">Cannot invoke "net.serenitybdd.core.pages.WebElementFacade.click()" because "this.jsAlertsPage" is null</error><system-err>Cannot invoke "net.serenitybdd.core.pages.WebElementFacade.click()" because "this.jsAlertsPage" is null
+pages.HerokuMainPage.navigateToPage(HerokuMainPage.java:72)
+steps.frontend.HerokuMainPageSteps.navigateToXPage(HerokuMainPageSteps.java:13)
+✽.I am on the JavaScript alerts page(file:///home/runner/work/JavaAutomationFramework/JavaAutomationFramework/src/test/resources/features/frontend/js-alert.feature:17)
+</system-err></testcase></testsuite>

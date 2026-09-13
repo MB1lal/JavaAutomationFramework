@@ -6,7 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Screenshots</title>
 
-<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 <link rel="apple-touch-icon" sizes="57x57" href="apple-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="apple-icon-60x60.png">
 <link rel="apple-touch-icon" sizes="72x72" href="apple-icon-72x72.png">
@@ -22,17 +22,16 @@
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <meta name="msapplication-TileColor" content="#ffffff">
 <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
-<meta name="theme-color" content="#ffffff">
-<link rel="stylesheet" href="bootstrap-icons/bootstrap-icons.css">
+<meta name="theme-color" content="#ffffff"><link rel="stylesheet" href="bootstrap-icons/bootstrap-icons.css">
 <!-- JQuery -->
-<script type="text/javascript" src="scripts/jquery-1.11.1.min.js"></script><!-- Required Stylesheets -->
+<script type="text/javascript" src="scripts/jquery-3.7.1.min.js"></script><!-- Required Stylesheets -->
 <link href="bootstrap-treeview/dist/bootstrap-treeview.min.css" rel="stylesheet">
 
 <!-- Required Javascript -->
 <script src="bootstrap-treeview/dist/bootstrap-treeview.min.js"></script><!-- DataTables -->
-<link type="text/css" href="datatables/1.13.1/datatables.min.css" rel="stylesheet" />
-<script type="text/javascript" src="datatables/1.13.1/datatables.min.js"></script>
-<script type="text/javascript" src="datatables/1.13.1/time-elapsed-dhms.js"></script>
+<link type="text/css" href="datatables/2.3.1/datatables.min.css" rel="stylesheet" />
+<script type="text/javascript" src="datatables/2.3.1/datatables.min.js"></script>
+<script type="text/javascript" src="datatables/2.3.1/time-elapsed-dhms.js"></script>
 
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <script src="bootstrap/js/bootstrap.min.js"></script>
@@ -69,44 +68,75 @@
     // Register the plugin to all charts:
     Chart.register(ChartDataLabels);
 </script>
-<!-- Nivo Slider -->
-<link rel="stylesheet" href="nivo-slider/3.2/nivo-slider.css" type="text/css" media="screen" />
-<link rel="stylesheet" href="nivo-slider/3.2/themes/default/default.css" type="text/css" media="screen" />
-<script src="nivo-slider/3.2/jquery.nivo.slider.pack.js" type="text/javascript"></script>
+
+    <!-- Swiper.js local styles and script -->
+    <link rel="stylesheet" href="swiper/swiper-bundle.min.css" />
+    <script src="swiper/swiper-bundle.min.js"></script>
 
     <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const startIndex = parseInt(urlParams.get("screenshot")) || 0;
 
-        function getUrlVars() {
-            var vars = {};
-            var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
-                vars[key] = value;
-            });
-            return vars;
-        }
-
-        var screenshotIndex = getUrlVars()["screenshot"];
-
-        $(window).load(function () {
-            $('#slider').nivoSlider({
-                startSlide: screenshotIndex,
+            new Swiper('.swiper', {
+                initialSlide: startIndex,
                 effect: 'fade',
-                animSpeed: 200,
-                manualAdvance: true
+                speed: 200,
+                pagination: {
+                    el: ".swiper-pagination",
+                    clickable: true,
+                    renderBullet: function (index, className) {
+                        return '<span class="' + className + '">' + (index + 1) + "</span>";
+                    },
+                    dynamicBullets: true,
+                    dynamicMainBullets: 3  // Shows 3 main bullets + 2 smaller ones on sides
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev'
+                },
+                keyboard: {
+                    enabled: true,
+                    onlyInViewport: true
+                }
             });
-        });
-
-        $(window).keydown(function(e) {
-            switch(e.which) {
-                case 37:
-                    $('a.nivo-prevNav').click();
-                    break;
-                case 39:
-                    $('a.nivo-nextNav').click();
-                    break;
-            }
         });
     </script>
 
+    <style>
+        .swiper {
+            width: 100%;
+            max-width: 800px;
+            margin: 20px auto;
+        }
+        .swiper-slide img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .swiper-slide img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .swiper-pagination-bullet {
+            width: 20px;
+            height: 20px;
+            text-align: center;
+            line-height: 20px;
+            font-size: 12px;
+            color: #000;
+            opacity: 1;
+            background: lightgrey;
+        }
+
+        .swiper-pagination-bullet-active {
+            color: #fff;
+            background: #007aff;
+        }
+    </style>
 </head>
 
 <body>
@@ -128,7 +158,7 @@
             <span class="breadcrumbs">
                 <a href="index.html">Home</a>
                 > <span class="truncate-40"><a
-                    href="e73098d7b24107b359caf8f0412668a44e0caeb8e96b99deb890ce5ca5fd719a.html">Dropdown Page Tests</a></span>
+                    href="eda23ab4967320a41009792bdb5de1872d2066ce7534e76b24205689a2032c53.html">Dropdown</a></span>
                 > <span class="truncate-60"><a
                     href="f3535a1cf203c0d0042a0979286b8c79d514e60585305b2725b21b4bfce8ec25.html">Select Option from Dropdown </a></span>
                 > Screenshots
@@ -158,7 +188,7 @@
             <a href="576946480b52ad056d6f5bddf874399c83582ecf90963cc074a14c70580e7d9f.html"><i class="bi bi-chat-text"></i> Features</a>
         </li>
     </ul>
-    <span class="date-and-time"><a href="build-info.html"><i class="bi bi-info-circle"></i></a> Report generated 26-12-2023 09:19</span>
+    <span class="date-and-time"><a href="build-info.html"><i class="bi bi-info-circle"></i></a> Report generated 13-09-2026 12:38</span>
     <br style="clear:left"/>
 </div>
 
@@ -187,7 +217,7 @@
                         <td valign="top" align="right">
                             <p class="tag">
                                 <span class="badge tag-badge" style="background:default;"
-                                    <i class="bi bi-tag-fill"></i>&nbsp;<a class="tagLink" style="background:default;" href="34658a1663fcf042bd7acb3325affbe4e647c8acd84d0228be2f52e1381e61b9.html">10 To 30 Seconds
+                                    <i class="bi bi-tag-fill"></i>&nbsp;<a class="tagLink" style="background:default;" href="6c5512236937b92cd7a296b24edb966c2bd94be46b8910f8b129a42d6150eb25.html">1 To 10 Seconds
                                         (Duration)
                                 </a>
                                 </span>
@@ -225,9 +255,9 @@
                 <table class="outcome-header">
                     <tr>
                         <td colspan="2" class="test-title-bar">
-                            <span class="outcome-icon"><a href='##beforetable'><i class='bi bi-check-circle-fill success-icon fa-2x' title='SUCCESS'></i></a></span>
+                            <span class="outcome-icon"><a href='##beforetable'><i class='bi bi-exclamation-triangle-fill error-icon fa-2x' title='ERROR'></i></a></span>
                             <span class="test-case-title">
-                                <span class="success-color">Select Option from Dropdown
+                                <span class="error-color">Select Option from Dropdown
                                     <span class="related-issue-title"></span>
                                 </span>
                             </span>
@@ -244,21 +274,60 @@
 
     <div id="beforetable"></div>
     <div id="contenttilttle">
-        <div class="slider-wrapper theme-default">
-            <div id="slider">
-                <img src="0dd81559ab827d1e08076c7c74d25012141de2af518b731fbd517b02e86716b7.png" title=" Given I am on the dropdown page" width="0"/>
-                <img src="21fe611ac99414588ad0a6c00c70eaa1c81d2ba4e17f3693929685d75b43daf2.png" title=" When I select option Option 2 from the dropdown" width="0"/>
+            <div class="screenshotFailure panel panel-danger">
+    <div style="display:block">
+        <div class="table">
+            <div class="row">
+                <div class="col-sm-10" style="padding-left:1.5em; padding-top:0.5em; padding-bottom:0.5em;">
+                    <span class="error-message error-message-title">Null pointer exception: Cannot invoke 'net.serenitybdd.core.pages.WebElementFacade.click()' because 'this.dropdownPage' is null</span>
+                </div>
+                <div class="col-sm-2">
+                    <a class="btn btn-warning details-button" data-toggle="collapse" href="#stacktraceModal-overall"
+                       role="button" aria-expanded="false" aria-controls="multiCollapseExample1"><i class="bi bi-eye"></i> More details</a>
+                </div>
+             </div>
+        </div>
+    <div>
 
-                <img src="21fe611ac99414588ad0a6c00c70eaa1c81d2ba4e17f3693929685d75b43daf2.png" title=" Then the selected option should be Option 2: <span class='success-color'>SUCCESS</span>" width="0"/>
+    <!-- Details Section -->
+    <div class="row stacktrace-details">
+      <div class="col">
+        <div class="collapse multi-collapse" id="stacktraceModal-overall">
+            <div class="card">
+                <div class="card-header">
+                    <h4>java.lang.NullPointerException </h4>
+                </div>
+                <div class="card-body">
+                    <div>
+                        <pre>pages.HerokuMainPage.navigateToPage(HerokuMainPage.java:54)<br />steps.frontend.HerokuMainPageSteps.navigateToXPage(HerokuMainPageSteps.java:13)<br />✽.I am on the dropdown page(file:///home/runner/work/JavaAutomationFramework/JavaAutomationFramework/src/test/resources/features/frontend/dropdown.feature:5)<br /></pre>
+                    </div>
+
+                </div>
             </div>
         </div>
-
-
+    </div>
+                    <div class="panel-body">
+                        <a href="pagesource16285101639477164056.html" target="_blank" class="btn btn-info">HTML Source</a>
+                    </div>
+            </div>
+    <!-- Swiper Carousel -->
+    <div class="swiper">
+        <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <img src="22c92843a50f9bf3bce5ebc05cfe1576aa96969ceb6b078ad275c4889d513484.png" title=" Given I am on the dropdown page: &lt;span class=&#39;error-color&#39;&gt;ERROR&lt;/span&gt;" width="0" />
+                        <div style="text-align: center; margin-top: 5px;">
+                            <a href="pagesource16285101639477164056.html" target="_blank" class="btn btn-info btn-sm">HTML Source</a>
+                        </div>
+                </div>
+        </div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-pagination"></div>
     </div>
 </div>
 <div id="beforefooter"></div>
 <div id="bottomfooter">
-    <span class="version">Serenity BDD version 4.0.30</span>
+    <span class="version">Serenity BDD version 5.3.11</span>
 </div>
 </body>
 </html>

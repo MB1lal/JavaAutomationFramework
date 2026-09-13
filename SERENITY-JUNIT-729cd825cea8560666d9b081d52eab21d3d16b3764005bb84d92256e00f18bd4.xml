@@ -1,1 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><testsuite errors="0" failures="0" name="Form Authentication Tests" skipped="0" tests="2" time="12.51" timestamp="2023-12-26 09:19:55"><testcase name="Valid Login"/><testcase name="Invalid Login"/></testsuite>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><testsuite errors="2" failures="0" name="Form Authentication Tests" skipped="0" tests="2" time="6.22" timestamp="2026-09-13 12:39:05"><testcase name="Valid Login"><error message="Cannot invoke &quot;net.serenitybdd.core.pages.WebElementFacade.click()&quot; because &quot;this.formAuthentication&quot; is null" type="java.lang.NullPointerException">Cannot invoke "net.serenitybdd.core.pages.WebElementFacade.click()" because "this.formAuthentication" is null</error><system-err>Cannot invoke "net.serenitybdd.core.pages.WebElementFacade.click()" because "this.formAuthentication" is null
+pages.HerokuMainPage.navigateToPage(HerokuMainPage.java:48)
+steps.frontend.HerokuMainPageSteps.navigateToXPage(HerokuMainPageSteps.java:13)
+✽.I am on the form authentication page(file:///home/runner/work/JavaAutomationFramework/JavaAutomationFramework/src/test/resources/features/frontend/authentication.feature:5)
+</system-err></testcase><testcase name="Invalid Login"><error message="Cannot invoke &quot;net.serenitybdd.core.pages.WebElementFacade.click()&quot; because &quot;this.formAuthentication&quot; is null" type="java.lang.NullPointerException">Cannot invoke "net.serenitybdd.core.pages.WebElementFacade.click()" because "this.formAuthentication" is null</error><system-err>Cannot invoke "net.serenitybdd.core.pages.WebElementFacade.click()" because "this.formAuthentication" is null
+pages.HerokuMainPage.navigateToPage(HerokuMainPage.java:48)
+steps.frontend.HerokuMainPageSteps.navigateToXPage(HerokuMainPageSteps.java:13)
+✽.I am on the form authentication page(file:///home/runner/work/JavaAutomationFramework/JavaAutomationFramework/src/test/resources/features/frontend/authentication.feature:11)
+</system-err></testcase></testsuite>
